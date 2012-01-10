@@ -5,14 +5,34 @@
 // Modules
 
 var http = require('http');
+var url = require('url');
 
-// Create the server
-var server = http.createServer(function(request, response) {
+function renderAddNoteForm(request, response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
   response.write('BOOYAH!');
   response.end();
+}
+
+function render404(request, response) {
+  response.writeHead(404);
+  response.write('404 File Not Found');
+  response.end();
+}
+
+// Create the server
+var server = http.createServer(function(request, response) {
+  // parse the url, make sure we're going to the right spot
+  var addNoteRegex = new RegExp('^/newNote/?$');
+  var pathname = url.parse(request.url).pathname;
+  
+  if (addNoteRegex.test(pathname)) {
+    renderAddNoteForm(request, response);
+  } else {
+    render404(request, response);
+  }
+    
 });
 
 // listen on the server
