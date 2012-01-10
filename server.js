@@ -6,12 +6,15 @@
 
 var http = require('http');
 var url = require('url');
+var fs = require('fs');
+
+var newNoteFormHTML = fs.readFileSync('views/post/newNote.html');
 
 function renderAddNoteForm(request, response) {
   response.writeHead(200, {
-    'Content-Type': 'text/plain'
+    'Content-Type': 'text/html; charset=utf-8'
   });
-  response.write('BOOYAH!');
+  response.write(newNoteFormHTML);
   response.end();
 }
 
