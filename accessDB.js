@@ -105,11 +105,3 @@ function setup(dbToUse) {
 } 
 
 exports.setup = setup;
-
-function makeDinner(function buyGroceries() {
-	// get the chicken, pasta, and veggies
-}) {
-	// use ingredients to make dinner
-}
-
-var ingredients = 
