@@ -13,7 +13,7 @@ var revAllNotes = require('./reviewAllNotes');
 var revMyNotes = require('./reviewMyNotes');
 var db = require('./accessDB');
 
-db.start('mongodb://localhost/CrowdNotes');
+db.setup('mongodb://localhost/CrowdNotes');
 
 // Define urls
 var handle = {};
