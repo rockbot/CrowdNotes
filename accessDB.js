@@ -8,22 +8,22 @@ function setup(dbToUse) {
 	// Define schema
 	var EventSchema = new Schema({
 	    name    	: String
-	  , date		: { type: Date, default: Date.now }
+	  , date	: { type: Date, default: Date.now }
 	  , description : String
-	  , notes		: [{ type: Schema.ObjectId, ref: 'Note' }]
+	  , notes	: [{ type: Schema.ObjectId, ref: 'Note' }]
 	});
 
 	var CreatorSchema = new Schema({
-		name	: String
+	    name	: String
 	  , email	: String 
 	  , notes	: [{ type: Schema.ObjectId, ref: 'Note' }]
 	});
 
 	var NoteSchema = new Schema({
-		_author		: { type: Schema.ObjectId, ref: 'Creator' }
-	  , body		: String
-	  ,	date		: { type: Date, default: Date.now }
-	  , _event		: { type: Schema.ObjectId, ref: 'Event' }
+	    _author	: { type: Schema.ObjectId, ref: 'Creator' }
+	  , body	: String
+	  , date	: { type: Date, default: Date.now }
+	  , _event	: { type: Schema.ObjectId, ref: 'Event' }
 	});
 
 	// connect to database
