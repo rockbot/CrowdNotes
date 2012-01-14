@@ -7,7 +7,7 @@
     10 Jan 2012 */
 
 // respond to request to access the page
-function start(request, response) {
+function start(request, response, postNote) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });

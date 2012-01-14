@@ -10,7 +10,6 @@
 
 var http = require('http');
 var url = require('url');
-var addNote = require('./addNote');
 
 // For those times when a page doesn't exist
 function render404(request, response) {
@@ -23,15 +22,26 @@ function render404(request, response) {
 function start(handle) {
   function onRequest(request, response) {
     // parse the url, make sure we're going to the right spot
-	// var addNoteRegex = new RegExp('^/newNote/?$');
-
-    var pathname = url.parse(request.url).pathname;
+		// var addNoteRegex = new RegExp('^/newNote/?$');
+  	var pathname = url.parse(request.url).pathname;
    
-    if (typeof handle[pathname] === 'function') {
-      handle[pathname](request, response);
-    } else {
-      render404(request, response);
-    }
+		// prepare for incoming requests
+		var postNote = '';
+		request.setEncoding('utf8');
+	
+		request.addListener('data', function(postNoteChunk) {
+			postNote += postNoteChunk;
+			// console.log('Received POST note chunk "' + postNoteChunk + '".')
+		});
+	
+		request.addListener('end', function() {
+			// do some routing
+		    if (typeof handle[pathname] === 'function') {
+		      handle[pathname](request, response, postNote);
+		    } else {
+		      render404(request, response);
+		    }
+		});
   }
 
   // Create the server

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Create Event</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  
+  <body>
+    <h1>Create an Event</h1>
+    <h2>Give us the details!</h2>
+    <form method="post" action="/saveEvent">
+			<label>What's the Name of the Event?</label>
+			<input type="text" name="eventname" size="20" /><br/><br/>
+      <label>Date:</label> <input type="date" name="eventdate" /><br/><br/>
+ 			<label>Description:</label><input type="text" name="eventdesc" size="20" /><br/><br/>
+      <input type="submit" value="Create Event" />
+    </form>
+  </body>
+</html>
