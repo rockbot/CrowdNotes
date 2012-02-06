@@ -68,4 +68,10 @@ AccessDB.prototype.closeDB = function() {
 	mongoose.disconnect();
 }
 
+AccessDB.prototype.getEvents = function(callback) {
+  Event.find({},['name', '_id'], function(err, events) {
+    callback(null, events);
+  })
+}
+
 exports.AccessDB = AccessDB;

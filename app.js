@@ -34,7 +34,15 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
-app.get('/newNote', routes.newNote);
+app.get('/newUser', routes.newUser);
+app.get('/newNote', function(req, res) {
+  db.getEvents(function(err, events) {
+    res.render('newNote.jade', { locals:
+      { title: 'Write a Note!' 
+      , currentEvents: events }
+    });
+  });
+});
 app.get('/newEvent', function(req, res) {
  res.render('newEvent.jade', { locals:
   { title: 'Create an Event!' }

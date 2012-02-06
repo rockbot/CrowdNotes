@@ -10,6 +10,7 @@ form(method='post')
   div
     label Event:
     select
-      - 
+      each event in currentEvents
+        option(value="#{event._id}")= event.name
   div
     input(type="submit", value="Save My Note!")

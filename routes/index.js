@@ -16,3 +16,13 @@ exports.newNote = function(req, res){
     { title: 'Write a note!' }
   });
 };
+
+/* 
+ * GET new user page
+ */
+
+exports.newUser = function(req, res){
+  res.render('newUser.jade', { locals: 
+    { title: 'Create a user!' }
+  });
+};
