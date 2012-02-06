@@ -28,7 +28,6 @@ function mkdirP (p, mode, f) {
                     // if the stat fails, then that's super weird.
                     // let the original EEXIST be the failure reason.
                     if (er2 || !stat.isDirectory()) cb(er)
-                    else if ((stat.mode & 0777) !== mode) fs.chmod(p, mode, cb);
                     else cb();
                 });
                 break;
@@ -68,16 +67,6 @@ mkdirP.sync = function sync (p, mode) {
                     throw err0
                 }
                 if (!stat.isDirectory()) throw err0;
-                else if ((stat.mode & 0777) !== mode) {
-                    try {
-                        fs.chmodSync(p, mode);
-                    }
-                    catch (err) {
-                        if (err && err.code === 'EPERM') return null;
-                        else throw err;
-                    }
-                    return null;
-                }
                 else return null;
                 break;
             default :
