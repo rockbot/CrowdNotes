@@ -37,9 +37,12 @@ app.get('/', routes.index);
 app.get('/newUser', routes.newUser);
 app.get('/newNote', function(req, res) {
   db.getEvents(function(err, events) {
-    res.render('newNote.jade', { locals:
-      { title: 'Write a Note!' 
-      , currentEvents: events }
+    db.getCreators(function(err, users) {
+      res.render('newNote.jade', { locals:
+        { title: 'Write a Note!' 
+        , currentEvents: events 
+        , currentNames: users }
+      });
     });
   });
 });

@@ -71,7 +71,13 @@ AccessDB.prototype.closeDB = function() {
 AccessDB.prototype.getEvents = function(callback) {
   Event.find({},['name', '_id'], function(err, events) {
     callback(null, events);
-  })
+  });
+}
+
+AccessDB.prototype.getCreators = function(callback) {
+  Creator.find({}, ['name', '_id'], function(err, users) {
+    callback(null, users);
+  });
 }
 
 exports.AccessDB = AccessDB;

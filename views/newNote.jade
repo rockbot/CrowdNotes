@@ -3,7 +3,9 @@ p What are you learning?
 form(method='post')
   div
     label Name:
-    input(type="text", name="username", size="20")
+    select
+      each user in currentNames
+        option(value='#{user._id}')= user.name
   div
     label Note: 
     textarea(name="note", rows="15", cols="30")
