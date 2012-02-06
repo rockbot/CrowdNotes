@@ -1,37 +1,64 @@
-/*  CrowdNotes v0.0.1
 
-	app.js
-	Wraps everything together in a pretty little bow.
-	
-    Raquel Velez
-    10 Jan 2012 */
+/**
+ * Module dependencies.
+ */
 
-// Modules
-var server = require('./server');
-var welcome = require('./welcome');
-var addNote = require('./addNote');
-var manageEvent = require('./manageEvent');
-var manageUsers = require('./manageUsers');
-var revAllNotes = require('./reviewAllNotes');
-var revMyNotes = require('./reviewMyNotes');
-var db = require('./accessDB');
+var express = require('express')
+  , routes = require('./routes')
+  , DB = require('./accessDB').AccessDB;
 
-db.setup('mongodb://localhost/CrowdNotes');
+var app = module.exports = express.createServer();
 
-// Define urls
-var handle = {};
-handle['/'] = welcome.start;
-handle['/newNote'] = addNote.create;
-handle['/saveNote'] = addNote.save;
-handle['/newEvent'] = manageEvent.create;
-handle['/saveEvent'] = manageEvent.save;
-handle['/newUser'] = manageUsers.create;
-handle['/saveUser'] = manageUsers.save;
-handle['/reviewAllNotes'] = revAllNotes.start;
-handle['/reviewMyNotes'] = revMyNotes.start;
+var db = new DB('mongodb://localhost/CrowdNotes');
 
-// start the server
-server.start(handle);
+// Configuration
 
-// At some point, figure out how to close the database when we're done with the app!
-// db.closeDB();
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+});
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler()); 
+});
+
+// Routes
+
+app.get('/', routes.index);
+app.get('/newNote', routes.newNote);
+app.get('/newEvent', function(req, res) {
+ res.render('newEvent.jade', { locals:
+  { title: 'Create an Event!' }
+ });
+});
+
+app.post('/newEvent', function(req, res) {
+  db.saveEvent({
+    name : req.param('eventname')
+  , date : req.param('eventdate')
+  , desc : req.param('eventdesc')
+  }, function(err, docs) {
+    res.redirect('/');
+  });
+});
+
+app.post('/newNote', function(req, res) {
+  db.saveNote({
+    username : req.param('username')
+  , note     : req.param('note')
+  }, function(err, docs) {
+    res.redirect('/');  
+  });
+});
+
+app.listen(3000);
+console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
