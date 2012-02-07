@@ -3,7 +3,7 @@ p What are you learning?
 form(method='post')
   div
     label Name:
-    select
+    select(name='userid')
       each user in currentNames
         option(value='#{user._id}')= user.name
   div
@@ -11,7 +11,7 @@ form(method='post')
     textarea(name="note", rows="15", cols="30")
   div
     label Event:
-    select
+    select(name='eventid')
       each event in currentEvents
         option(value="#{event._id}")= event.name
   div

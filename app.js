@@ -46,6 +46,25 @@ app.get('/newNote', function(req, res) {
     });
   });
 });
+
+app.get('/eventNotes', function(req, res) {
+  db.getEvents(function(err, events) {
+    res.render('eventNotes.jade', { locals:
+      { title: 'Get all notes from an event'
+      , currentEvents: events }
+    });
+  });
+});
+
+app.get('/userNotes', function(req, res) {
+  db.getCreators(function(err, users) {
+    res.render('userNotes.jade', { locals:
+      { title: 'Get all notes from a user'
+      , currentUsers: users }
+    });
+  });
+});
+
 app.get('/newEvent', function(req, res) {
  res.render('newEvent.jade', { locals:
   { title: 'Create an Event!' }
@@ -64,10 +83,29 @@ app.post('/newEvent', function(req, res) {
 
 app.post('/newNote', function(req, res) {
   db.saveNote({
-    username : req.param('username')
+    userid   : req.param('userid')
   , note     : req.param('note')
+  , eventid  : req.param('eventid')
   }, function(err, docs) {
     res.redirect('/');  
+  });
+});
+
+app.post('/eventNotes', function(req, res) {
+  db.getNotesFromEvent(req.param('eventid'), function(err, notes) {
+    res.render('listNotes.jade', { locals: 
+      { title: 'Event Notes!'
+      , notesList : notes }
+    });
+  });
+});
+
+app.post('/userNotes', function(req, res) {
+  db.getNotesFromUser(req.param('userid'), function(err, notes) {
+    res.render('listNotes.jade', { locals: 
+      { title: 'User Notes!'
+      , notesList : notes }
+    });
   });
 });
 

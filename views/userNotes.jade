@@ -1,0 +1,11 @@
+h1= title
+p Review all notes from a specific user
+form(method='post')
+  div
+    label Name of User: 
+    select(name='userid')
+      each user in currentUsers 
+        option(value='#{user._id}')= user.name
+  div
+    input(type='submit', value='Get the notes!')
+

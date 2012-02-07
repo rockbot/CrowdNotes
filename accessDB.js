@@ -51,15 +51,16 @@ AccessDB.prototype.saveEvent = function(eventInfo, callback) {
 
 AccessDB.prototype.saveNote = function(noteInfo, callback) {
   var newNote = new Note ({
-      _author : noteInfo.username
+      _author : noteInfo.userid
     , body    : noteInfo.note
-    , date    : Date.now
-    , _event  : 'BarCamp 7'
+    //, date    : Date.now
+    , _event  : noteInfo.eventid
     });
 
   newNote.save(function (err) {
     if (err) {throw err;}
     console.log('Name: ' + newNote._author + '\nNote: ' + newNote.body);
+    callback(null, newNote);
   });
 };
 
@@ -78,6 +79,26 @@ AccessDB.prototype.getCreators = function(callback) {
   Creator.find({}, ['name', '_id'], function(err, users) {
     callback(null, users);
   });
+}
+
+AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
+  Note
+  .find({'_event':eventid})
+  .populate('_author')
+  .populate('_event')
+  .run(function(err, notes) {
+    callback(null, notes);
+  })
+}
+
+AccessDB.prototype.getNotesFromUser = function(userid, callback) {
+  Note
+  .find({'_author':userid})
+  .populate('_author')
+  .populate('_event')
+  .run(function(err, notes) {
+    callback(null, notes);
+  })
 }
 
 exports.AccessDB = AccessDB;

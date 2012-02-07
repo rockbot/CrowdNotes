@@ -1,0 +1,9 @@
+h1= title
+p Here are the notes you requested:
+ul
+  each note in notesList
+    li Author: #{note._author.name} 
+      p Body: #{note.body}
+      p Date: #{note.date.toLocaleDateString()}
+      p Time: #{note.date.toLocaleTimeString()}
+      p Event: #{note._event.name}
