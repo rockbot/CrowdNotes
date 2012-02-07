@@ -139,6 +139,7 @@ AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
 }
 
 AccessDB.prototype.getNotesFromUser = function(userid, callback) {
+  console.log('userid: ' + userid);
   Note
   .find({'_user':userid})
   .populate('_user')
@@ -147,5 +148,9 @@ AccessDB.prototype.getNotesFromUser = function(userid, callback) {
     callback(null, notes);
   })
 }
+
+everyauth.everymodule.findUserById( function(userId, callback) {
+  User.findById(userId,callback);
+});
 
 exports.AccessDB = AccessDB;

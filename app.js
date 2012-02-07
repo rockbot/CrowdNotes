@@ -70,6 +70,15 @@ app.get('/eventNotes', function(req, res) {
   });
 });
 
+app.get('/myNotes', function(req, res) {
+  db.getNotesFromUser(req.user.id, function(err, notes) {
+    res.render('listNotes.jade', { locals:
+      { title: "Notes I've written"
+      , notesList: notes }
+    });
+  });
+});
+
 app.get('/userNotes', function(req, res) {
   db.getUsers(function(err, users) {
     res.render('userNotes.jade', { locals:
@@ -97,7 +106,7 @@ app.post('/newEvent', function(req, res) {
 
 app.post('/newNote', function(req, res) {
   db.saveNote({
-    userid   : req.param('userid')
+    userid   : req.user.id
   , note     : req.param('note')
   , eventid  : req.param('eventid')
   }, function(err, docs) {
