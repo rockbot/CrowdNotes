@@ -1,11 +1,9 @@
 h1= title
+p Hi, #{everyauth.user.name.first}!
 p What are you learning?
 form(method='post')
   div
-    label Name:
-    select(name='userid')
-      each user in currentNames
-        option(value='#{user._id}')= user.name
+    input(name='userid', value='#{everyauth.user.id}', type='hidden')
   div
     label Note: 
     textarea(name="note", rows="15", cols="30")

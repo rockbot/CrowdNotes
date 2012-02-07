@@ -101,6 +101,7 @@ app.post('/newNote', function(req, res) {
   , note     : req.param('note')
   , eventid  : req.param('eventid')
   }, function(err, docs) {
+    console.log(req.user)
     res.redirect('/');  
   });
 });

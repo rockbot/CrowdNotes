@@ -2,7 +2,7 @@ h1= title
 p Here are the notes you requested:
 ul
   each note in notesList
-    li User: #{note._user.name} 
+    li User: #{note._user.name.first} #{note._user.name.last} 
       p Body: #{note.body}
       p Date: #{note.date.toLocaleDateString()}
       p Time: #{note.date.toLocaleTimeString()}

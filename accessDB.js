@@ -77,7 +77,7 @@ AccessDB.prototype.saveUser = function(userInfo, callback) {
 
   newUser.save(function(err) {
     if (err) {throw err;}
-    console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
+    //console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
     callback(null, userInfo);
   });
 };
@@ -91,7 +91,7 @@ AccessDB.prototype.saveEvent = function(eventInfo, callback) {
 
   newEvent.save(function(err) {
     if (err) {throw err;}
-    console.log('Name: ' + newEvent.name + '\nDate: ' + newEvent.date + '\nDesc: ' + newEvent.description);
+    //console.log('Name: ' + newEvent.name + '\nDate: ' + newEvent.date + '\nDesc: ' + newEvent.description);
     callback(null, eventInfo);
   });
 };
@@ -106,7 +106,7 @@ AccessDB.prototype.saveNote = function(noteInfo, callback) {
 
   newNote.save(function (err) {
     if (err) {throw err;}
-    console.log('Name: ' + newNote._user + '\nNote: ' + newNote.body);
+    //console.log('Name: ' + newNote._user + '\nNote: ' + newNote.body);
     callback(null, newNote);
   });
 };

@@ -5,7 +5,7 @@ form(method='post')
     label Name of User: 
     select(name='userid')
       each user in currentUsers 
-        option(value='#{user._id}')= user.name
+        option(value='#{user._id}') #{user.name.first} #{user.name.last}
   div
     input(type='submit', value='Get the notes!')
 
