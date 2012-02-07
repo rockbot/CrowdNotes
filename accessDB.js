@@ -1,30 +1,64 @@
+// Module dependencies
 var mongoose = require('mongoose');
+var	Schema = mongoose.Schema;
+
+// dependencies for authentication
+var everyauth = require('everyauth')
+  , Promise = everyauth.Promise;
+
+everyauth.debug = true;
+
+var mongooseAuth = require('mongoose-auth');
 
 // connect to database
 AccessDB = function(dbToUse) {
   mongoose.connect(dbToUse);
-  console.log('We have connected to mongodb');
+  // Check connection to mongoDB
+  mongoose.connection.on('open', function() {
+    console.log('We have connected to mongodb');
+  }); 
 };
-
-// Check connection to mongoDB
-var	Schema = mongoose.Schema;
 
 // Define schema
 var EventSchema = new Schema({
     name    	: String
   , date	: { type: Date, default: Date.now }
   , description : String
-  , notes	: [{ type: Schema.ObjectId, ref: 'Note' }]
 });
 
-var CreatorSchema = new Schema({
-    name	: String
-  , email	: String 
-  , notes	: [{ type: Schema.ObjectId, ref: 'Note' }]
-});
+var UserSchema = new Schema({})
+  , User;
 
+UserSchema.plugin(mongooseAuth, {
+  everymodule: {
+    everyauth: {
+      User: function () {
+        return User;
+      }
+    }
+  }
+, password: {
+    loginWith: 'email'
+  , extraParams: {
+      name: {
+        first: String
+      , last: String 
+      }
+    }
+  , everyauth: {
+      getLoginPath: '/login'
+    , postLoginPath: '/login'
+    , loginView: 'login.jade'
+    , getRegisterPath: '/register'
+    , postRegisterPath: '/register'
+    , registerView: 'register.jade'
+    , loginSuccessRedirect: '/'
+    , registerSuccessRedirect: '/'
+    }
+  }
+});
 var NoteSchema = new Schema({
-    _author	: { type: Schema.ObjectId, ref: 'Creator' }
+    _user	: { type: Schema.ObjectId, ref: 'User' }
   , body	: String
   , date	: { type: Date, default: Date.now }
   , _event	: { type: Schema.ObjectId, ref: 'Event' }
@@ -32,8 +66,21 @@ var NoteSchema = new Schema({
 
 // define models
 var Note = mongoose.model('Note', NoteSchema);
-var Creator = mongoose.model('Creator', CreatorSchema);
+User = mongoose.model('User', UserSchema);
 var Event = mongoose.model('Event', EventSchema);
+
+AccessDB.prototype.saveUser = function(userInfo, callback) {
+  var newUser = new User ({
+    name : userInfo.name
+  , email: userInfo.email
+  });
+
+  newUser.save(function(err) {
+    if (err) {throw err;}
+    console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
+    callback(null, userInfo);
+  });
+};
 
 AccessDB.prototype.saveEvent = function(eventInfo, callback) {
   var newEvent = new Event ({
@@ -51,7 +98,7 @@ AccessDB.prototype.saveEvent = function(eventInfo, callback) {
 
 AccessDB.prototype.saveNote = function(noteInfo, callback) {
   var newNote = new Note ({
-      _author : noteInfo.userid
+      _user : noteInfo.userid
     , body    : noteInfo.note
     //, date    : Date.now
     , _event  : noteInfo.eventid
@@ -59,7 +106,7 @@ AccessDB.prototype.saveNote = function(noteInfo, callback) {
 
   newNote.save(function (err) {
     if (err) {throw err;}
-    console.log('Name: ' + newNote._author + '\nNote: ' + newNote.body);
+    console.log('Name: ' + newNote._user + '\nNote: ' + newNote.body);
     callback(null, newNote);
   });
 };
@@ -75,8 +122,8 @@ AccessDB.prototype.getEvents = function(callback) {
   });
 }
 
-AccessDB.prototype.getCreators = function(callback) {
-  Creator.find({}, ['name', '_id'], function(err, users) {
+AccessDB.prototype.getUsers = function(callback) {
+  User.find({}, ['name', '_id'], function(err, users) {
     callback(null, users);
   });
 }
@@ -84,7 +131,7 @@ AccessDB.prototype.getCreators = function(callback) {
 AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
   Note
   .find({'_event':eventid})
-  .populate('_author')
+  .populate('_user')
   .populate('_event')
   .run(function(err, notes) {
     callback(null, notes);
@@ -93,8 +140,8 @@ AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
 
 AccessDB.prototype.getNotesFromUser = function(userid, callback) {
   Note
-  .find({'_author':userid})
-  .populate('_author')
+  .find({'_user':userid})
+  .populate('_user')
   .populate('_event')
   .run(function(err, notes) {
     callback(null, notes);

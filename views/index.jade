@@ -1,14 +1,24 @@
 h1= title
 h2 Welcome to #{title}!
 p What would you like to do today?
-ul 
-  li 
-    a(href="/newUser") Register a new user
-  li 
-    a(href="/newEvent") Create an event
-  li 
-    a(href="/newNote") Write a note
-  li 
-    a(href="/eventNotes") See all the notes from an event
-  li 
-    a(href="/userNotes") See all the notes from a specific user
+- if (!everyauth.loggedIn)
+  p Not authenticated
+  h3
+    a(href='/register') Register a New User
+  h3
+    a(href='/login') Login with Password
+
+- else
+  h2 Authenticated
+
+  ul 
+    li 
+      a(href="/newEvent") Create an event
+    li 
+      a(href="/newNote") Write a note
+    li 
+      a(href="/eventNotes") See all the notes from an event
+    li 
+      a(href="/userNotes") See all the notes from a specific user
+    li
+      a(href="/logout") Logout

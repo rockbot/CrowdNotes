@@ -3,9 +3,16 @@
  * Module dependencies.
  */
 
+// base dependencies for app
 var express = require('express')
   , routes = require('./routes')
-  , DB = require('./accessDB').AccessDB;
+  , DB = require('./accessDB').AccessDB
+  , mongooseAuth = require('mongoose-auth');
+
+var everyauth = require('everyauth')
+  , Promise = everyauth.Promise;
+
+everyauth.debug = true;
 
 var app = module.exports = express.createServer();
 
@@ -19,8 +26,11 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-  app.use(app.router);
+//  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: 'applecake' }));
+  app.use(mongooseAuth.middleware());
 });
 
 app.configure('development', function(){
@@ -33,11 +43,15 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
-app.get('/newUser', routes.newUser);
+app.get('/', function(req, res) {
+  res.render('index.jade', { locals:
+    { title: 'CrowdNotes' }
+  });
+});
+
 app.get('/newNote', function(req, res) {
   db.getEvents(function(err, events) {
-    db.getCreators(function(err, users) {
+    db.getUsers(function(err, users) {
       res.render('newNote.jade', { locals:
         { title: 'Write a Note!' 
         , currentEvents: events 
@@ -57,7 +71,7 @@ app.get('/eventNotes', function(req, res) {
 });
 
 app.get('/userNotes', function(req, res) {
-  db.getCreators(function(err, users) {
+  db.getUsers(function(err, users) {
     res.render('userNotes.jade', { locals:
       { title: 'Get all notes from a user'
       , currentUsers: users }
@@ -108,6 +122,13 @@ app.post('/userNotes', function(req, res) {
     });
   });
 });
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+mongooseAuth.helpExpress(app);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
