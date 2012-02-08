@@ -1,26 +1,44 @@
-h1= title
-h2 Welcome to #{title}!
-p What would you like to do today?
-- if (!everyauth.loggedIn)
-  p Not authenticated
-  h3
-    a(href='/register') Register a New User
-  h3
-    a(href='/login') Login with Password
+title= title
+div.container_12
+  h2#header.grid_9.alpha Welcome to #{title}!
+  - if (!everyauth.loggedIn)
+    div#auth.grid_3.omega Not authenticated
+      br
+      a(href='/login') Login
+      br
+      a(href='/register') Register
+    div.clear
+    
+    div.grid_4.center.alpha
+      h3 About CrowdNotes
+    div.grid_4.center
+      h3 Something
+    div.grid_4.center.omega
+      h3 Something else
 
-- else
-  p Authenticated
+  - else
+    div#auth.grid_3.omega Authenticated
+      br
+      br
+      a(href='/logout') Logout
+    div.clear
+    p.grid_12.center.alpha What would you like to do today?
+    div.clear
 
-  ul 
-    li 
-      a(href="/newEvent") Create an event
-    li 
-      a(href="/newNote") Write a note
-    li 
-      a(href="/eventNotes") See all the notes from an event
-    li 
-      a(href="/myNotes") See all of my notes
-    li 
-      a(href="/userNotes") See all the notes from a specific user
-    li
-      a(href="/logout") Logout
+    ul#topOptions.grid_12.alpha 
+      li.grid_6.center.alpha
+        a(href="/newEvent") Create an event
+      li.grid_6.center.omega
+        a(href="/newNote") Write a note
+      div.clear
+    div.clear
+
+    ul#midOptions.grid_12.alpha
+      li.grid_4.center.alpha 
+        a(href="/eventNotes") See all the notes from an event
+      li.grid_4.center
+        a(href="/myNotes") See all of my notes
+      li.grid_4.center.omega
+        a(href="/userNotes") See all the notes from a specific user
+      div.clear
+    div.clear

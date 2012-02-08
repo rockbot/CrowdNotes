@@ -1,7 +1,32 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 a {
   color: #00b7ff;
+}
+#header {
+  outline: 1px solid #000;
+  height: 60px;
+  padding-top: 30px;
+}
+#auth {
+  outline: 1px solid #000;
+  height: 60px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.center {
+  text-align: center;
+  height: 30px;
+  padding-top: 15px;
+  outline: 1px solid #000;
+}
+#topOptions,
+#midOptions {
+  display: inline-block;
+}
+.hidden {
+  visibility: hidden;
 }
