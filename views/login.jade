@@ -1,13 +1,23 @@
+title Login to CrowdNotes
+div.container_12
+  h2#header.grid_12.alpha Please login with your email and password
 - if ('undefined' !== typeof errors && errors.length)
   ul#errors
     - each error in errors
       li.error= error
-form(action='/login', method='POST')
-  #login
-    label(for=everyauth.password.loginFormFieldName) Email
-    input(type='text', name=everyauth.password.loginFormFieldName, value=email)
-  #password
-    label(for=everyauth.password.passwordFormFieldName) Password
-    input(type='password', name=everyauth.password.passwordFormFieldName)
-  #submit
-    input(type='submit') Login
+div.clear
+
+div.grid_4
+  form(action='/login', method='POST')
+    #login
+      label.title(for=everyauth.password.loginFormFieldName) Email
+      br
+      input(type='text', name=everyauth.password.loginFormFieldName, value=email)
+    br
+    #password
+      label(for=everyauth.password.passwordFormFieldName).title Password
+      br
+      input(type='password', name=everyauth.password.passwordFormFieldName)
+    #submit
+      input(type='submit') Login
+div.clear

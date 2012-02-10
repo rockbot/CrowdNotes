@@ -1,11 +1,16 @@
-h1= title
-p Review all notes from a specific user
-form(method='post')
-  div
-    label Name of User: 
-    select(name='userid')
-      each user in currentUsers 
-        option(value='#{user._id}') #{user.name.first} #{user.name.last}
-  div
-    input(type='submit', value='Get the notes!')
+title Create an Event!
+div.container_12
+  h2#header.grid_12 CrowdNotes - Review all notes from a specific user!
+  div.clear
+
+  div.grid_4
+    form(method='post')
+      div
+        label(for='userid') Name of User: 
+        select(id='userid', name='userid')
+          each user in currentUsers 
+            option(value='#{user._id}') #{user.name.first} #{user.name.last}
+      br
+      div
+        input(type='submit', value='Get the notes!')
 

@@ -1,10 +1,16 @@
-h1= title
-p Review all notes from a specific event
-form(method='post')
-  div
-    label Name of Event:
-    select(name='eventid')
-      each event in currentEvents 
-        option(value='#{event._id}')= event.name
-  div
-    input(type='submit', value='Get the notes!')
+title Create an Event!
+div.container_12
+  h2#header.grid_12 CrowdNotes - Review all notes from a specific event!
+  div.clear
+
+  div.grid_4
+    form(method='post')
+      div
+        label(for='eventid') Name of Event:
+        select(id='eventid', name='eventid')
+          each event in currentEvents 
+            option(value='#{event._id}')= event.name
+      br
+      div
+        input(type='submit', value='Get the notes!')
+  div.clear

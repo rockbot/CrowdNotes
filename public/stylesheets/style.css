@@ -1,7 +1,6 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  text-align: center;
 }
 a {
   color: #00b7ff;
@@ -10,12 +9,19 @@ a {
   outline: 1px solid #000;
   height: 60px;
   padding-top: 30px;
+  text-align: center;
 }
 #auth {
   outline: 1px solid #000;
   height: 60px;
   padding-top: 20px;
   padding-bottom: 10px;
+  text-align: center;
+}
+.title {
+  text-align: right;
+  width: 100px;
+  padding-right: 10px;
 }
 .center {
   text-align: center;
@@ -25,6 +31,13 @@ a {
 }
 #topOptions,
 #midOptions {
+  display: inline-block;
+}
+.notesList {
+  list-style-type: none;
+}
+.note {
+  list-style-type: none;
   display: inline-block;
 }
 .hidden {

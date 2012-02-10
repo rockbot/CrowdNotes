@@ -1,7 +1,6 @@
 body
   padding 50px
   font 14px "Lucida Grande", Helvetica, Arial, sans-serif
-  text-align center
 a
   color #00B7FF
 
@@ -9,12 +8,20 @@ a
   outline 1px solid black
   height h = 60px
   padding-top (h / 2) 
+  text-align center
 
 #auth
   outline 1px solid black
   height h = 60px
   padding-top (h / 3)
   padding-bottom (h / 6)
+  text-align center
+
+.title
+  //outline 1px solid black
+  text-align right
+  width 100px
+  padding-right 10px
 
 .center
   text-align center
@@ -23,6 +30,13 @@ a
   outline 1px solid black
 
 #topOptions, #midOptions
+  display inline-block
+
+.notesList
+  list-style-type none
+
+.note
+  list-style-type none 
   display inline-block
 
 .hidden

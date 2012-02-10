@@ -1,16 +1,24 @@
-h1= title
-p Hi, #{everyauth.user.name.first}!
-p What are you learning?
-form(method='post')
-  //div
-    input(name='userid', value='#{everyauth.user.id}', type='hidden')
-  div
-    label Note: 
-    textarea(name="note", rows="15", cols="30")
-  div
-    label Event:
-    select(name='eventid')
-      each event in currentEvents
-        option(value="#{event._id}")= event.name
-  div
-    input(type="submit", value="Save My Note!")
+title Create an Event!
+div.container_12
+  h2#header.grid_12 CrowdNotes - Write a Note!
+  div.clear
+
+  div.grid_4
+    p Hi, #{everyauth.user.name.first}!
+    p What are you learning?
+    form(method='post')
+      div
+        label(for='note') Note: 
+        br
+        textarea(id='note', name="note", rows="15", cols="30")
+      br
+      div
+        label(for='eventid') Event:
+        br
+        select(id='eventid', name='eventid')
+          each event in currentEvents
+            option(value="#{event._id}")= event.name
+      br
+      div
+        input(type="submit", value="Save My Note!")
+  div.clear

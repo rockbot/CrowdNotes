@@ -1,9 +1,19 @@
-h1= title
-p Here are the notes you requested:
-ul
-  each note in notesList
-    li User: #{note._user.name.first} #{note._user.name.last} 
-      p Body: #{note.body}
-      p Date: #{note.date.toLocaleDateString()}
-      p Time: #{note.date.toLocaleTimeString()}
-      p Event: #{note._event.name}
+title Notes List
+div.container_12
+  h2#header.grid_12 CrowdNotes - Show Me the Notes!
+  div.clear
+
+  div.grid_8
+    ul.notesList
+      each note in notesList
+        li 
+          ul.note
+            li.grid_4 User: #{note._user.name.first} #{note._user.name.last} 
+            li.grid_4 Event: #{note._event.name}
+            li.clear
+            li.grid_4 Date: #{note.date.toLocaleDateString()}
+            li.grid_4 Time: #{note.date.toLocaleTimeString()}
+            li.clear
+            li.grid_8 Body: #{note.body}
+            div.clear
+  div.clear

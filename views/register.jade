@@ -1,21 +1,34 @@
 title Register a New User
-h2 Register
+div.container_12
+  h2#header.grid_12 Please fill out this form to complete registration
 - if ('undefined' !== typeof errors && errors.length)
   ul#errors
     - each error in errors
       li.error= error
-form(action='/register', method='POST')
-  #login
-    label(for=everyauth.password.loginFormFieldName) Email
-    input(type='text', name=everyauth.password.loginFormFieldName, value=userParams[everyauth.password.loginFormFieldName])
-  #password
-    label(for=everyauth.password.passwordFormFieldName) Password
-    input(type='password', name=everyauth.password.passwordFormFieldName)
-  #first-name
-    label(for='name.first') First Name
-    input(type='text', name='name.first')
-  #last-name
-    label(for='name.last') Last Name
-    input(type='text', name='name.last')
-  #submit
-    input(type='submit') Register
+div.clear
+
+div.grid_4
+  form(action='/register', method='POST')
+    #login
+      label(for=everyauth.password.loginFormFieldName) Email
+      br
+      input(type='text', name=everyauth.password.loginFormFieldName, value=userParams[everyauth.password.loginFormFieldName])
+    br
+    #password
+      label(for=everyauth.password.passwordFormFieldName) Password
+      br
+      input(type='password', name=everyauth.password.passwordFormFieldName)
+    br
+    #first-name
+      label(for='name.first') First Name
+      br
+      input(type='text', name='name.first')
+    br
+    #last-name
+      label(for='name.last') Last Name
+      br
+      input(type='text', name='name.last')
+    br
+    #submit
+      input(type='submit') Register
+div.clear

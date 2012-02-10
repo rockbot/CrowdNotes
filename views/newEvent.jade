@@ -1,14 +1,23 @@
-h1= title
-p Create an Event!
-form(method='post')
-  div
-    label Name of Event:
-    input(type='text', name='eventname', size='20')
-  div
-    label Date:
-    input(type='date', name='eventdate')
-  div
-    label Description:
-    input(type='text', name='eventdesc')
-  div
-    input(type='submit', value='Save my Event!')
+title Create an Event!
+div.container_12
+  h2#header.grid_12 CrowdNotes - Create an Event!
+  div.clear
+
+  div.grid_4
+    form(method='post')
+      div
+        label(for='eventname') Name of Event:
+        br
+        input(id='eventname', type='text', name='eventname', size='20')
+      br
+      div
+        label(for='eventdate') Date:
+        br
+        input(id='eventdate', type='date', name='eventdate')
+      br
+      div
+        label(for='eventdesc') Description:
+        br
+        input(id='eventdesc', type='text', name='eventdesc')
+      div
+        input(type='submit', value='Save my Event!')
