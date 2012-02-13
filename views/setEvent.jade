@@ -1,0 +1,18 @@
+title= title
+
+div.container_12
+
+  h2.grid_4 Pick your event:
+  div.clear
+
+  form.grid_4(method='post')
+    div
+      label(for='eventid') Event:
+      br
+      select(id='eventid', name='eventid')
+        each event in currentEvents
+          option(value='#{event._id}')= event.name
+    br
+    div
+      input(type='submit', value='Set My Event!')
+  div.clear

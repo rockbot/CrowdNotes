@@ -13,11 +13,15 @@ div.container_12
         textarea(id='note', name="note", rows="15", cols="30")
       br
       div
-        label(for='eventid') Event:
-        br
-        select(id='eventid', name='eventid')
-          each event in currentEvents
-            option(value="#{event._id}")= event.name
+        - if (myEvent) 
+          p My Event: #{myEvent.name} 
+            a(href='/setEvent') Change Event
+        - else
+          label(for='eventid') Event:
+          br
+          select(id='eventid', name='eventid')
+            each event in currentEvents
+              option(value="#{event._id}")= event.name
       br
       div
         input(type="submit", value="Save My Note!")

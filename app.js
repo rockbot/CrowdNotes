@@ -52,10 +52,13 @@ app.get('/', function(req, res) {
 app.get('/newNote', function(req, res) {
   db.getEvents(function(err, events) {
     db.getUsers(function(err, users) {
-      res.render('newNote.jade', { locals:
-        { title: 'Write a Note!' 
-        , currentEvents: events 
-        , currentNames: users }
+      db.getMyEvent(function(err, myEvent) {
+        res.render('newNote.jade', { locals:
+          { title: 'Write a Note!' 
+          , myEvent: myEvent
+          , currentEvents: events 
+          , currentNames: users }
+        });
       });
     });
   });
@@ -94,6 +97,16 @@ app.get('/newEvent', function(req, res) {
  });
 });
 
+app.get('/setEvent', function(req, res) {
+  db.getEvents(function(err, events) {
+    res.render('setEvent.jade', { locals:
+      { title: 'Set my event'
+      , currentEvents: events }
+    });
+    { title: 'Set my event' }
+  });
+});
+
 app.post('/newEvent', function(req, res) {
   db.saveEvent({
     name : req.param('eventname')
@@ -130,6 +143,12 @@ app.post('/userNotes', function(req, res) {
       { title: 'User Notes!'
       , notesList : notes }
     });
+  });
+});
+
+app.post('/setEvent', function(req, res) {
+  db.setEvent(req.param('eventid'), function(err) {
+    res.redirect('/newNote');
   });
 });
 

@@ -19,11 +19,22 @@ AccessDB = function(dbToUse) {
   }); 
 };
 
+// Define class variable
+// !! Not sure if this is correct !!
+var myEventID = null;
+
+AccessDB.prototype.getMyEvent = function(callback) {
+  Event.findOne({'_id': myEventID}, function(err, myEvent) {
+    callback(null, myEvent);
+  });
+}
+
 // Define schema
 var EventSchema = new Schema({
     name    	: String
   , date	: { type: Date, default: Date.now }
   , description : String
+  , hashtag : String // need to verify it starts with '#'
 });
 
 var UserSchema = new Schema({})
@@ -57,6 +68,7 @@ UserSchema.plugin(mongooseAuth, {
     }
   }
 });
+
 var NoteSchema = new Schema({
     _user	: { type: Schema.ObjectId, ref: 'User' }
   , body	: String
@@ -69,6 +81,7 @@ var Note = mongoose.model('Note', NoteSchema);
 User = mongoose.model('User', UserSchema);
 var Event = mongoose.model('Event', EventSchema);
 
+// define prototypes
 AccessDB.prototype.saveUser = function(userInfo, callback) {
   var newUser = new User ({
     name : userInfo.name
@@ -136,6 +149,11 @@ AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
   .run(function(err, notes) {
     callback(null, notes);
   })
+}
+
+AccessDB.prototype.setEvent = function(eventid, callback) {
+  myEventID = eventid;
+  callback(null);
 }
 
 AccessDB.prototype.getNotesFromUser = function(userid, callback) {
