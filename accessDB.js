@@ -29,6 +29,11 @@ AccessDB.prototype.getMyEvent = function(callback) {
   });
 }
 
+AccessDB.prototype.clearMyEvent = function(callback) {
+  myEventID = null;
+  callback(null);
+}
+
 // Define schema
 var EventSchema = new Schema({
     name    	: String
@@ -119,7 +124,7 @@ AccessDB.prototype.saveNote = function(noteInfo, callback) {
 
   newNote.save(function (err) {
     if (err) {throw err;}
-    console.log('Name: ' + newNote._user + '\nNote: ' + newNote.body);
+    //console.log('Name: ' + newNote._user + '\nNote: ' + newNote.body);
     callback(null, newNote);
   });
 };

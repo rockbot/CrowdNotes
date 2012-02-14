@@ -1,19 +1,22 @@
-title Notes List
+title= title
 div.container_12
   h2#header.grid_12 CrowdNotes - Show Me the Notes!
   div.clear
 
   div.grid_8
     ul.notesList
-      each note in notesList
-        li 
-          ul.note
-            li.grid_4 User: #{note._user.name.first} #{note._user.name.last} 
-            li.grid_4 Event: #{note._event.name}
-            li.clear
-            li.grid_4 Date: #{note.date.toLocaleDateString()}
-            li.grid_4 Time: #{note.date.toLocaleTimeString()}
-            li.clear
-            li.grid_8 Body: #{note.body}
-            div.clear
+      - if (notesList.length > 0)
+        each note in notesList
+          li 
+            ul.note
+              li.grid_4 User: #{note._user.name.first} #{note._user.name.last} 
+              li.grid_4 Event: #{note._event.name}
+              li.clear
+              li.grid_4 Date: #{note.date.toLocaleDateString()}
+              li.grid_4 Time: #{note.date.toLocaleTimeString()}
+              li.clear
+              li.grid_8 Body: #{note.body}
+              div.clear
+      - else
+        p There are no notes yet!
   div.clear

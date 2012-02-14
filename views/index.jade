@@ -22,25 +22,33 @@ div.container_12
       br
       a(href='/logout') Logout
     div.clear
-    p.grid_12.center.alpha What would you like to do today?
+    p.grid_12.center.alpha Welcome, #{everyauth.user.name.first}! What would you like to do today?
     div.clear
 
+    - if (myEvent)
+      p.grid_12.center.alpha My Event: #{myEvent.name}
+      div.clear
+
     ul#topOptions.grid_12.alpha 
-      li.grid_4.center.alpha
-        a(href="/myNotes") See all of my notes
-      li.grid_4.center
+      li.grid_3.center.alpha
         a(href="/setEvent") Set my event
-      li.grid_4.center.omega
+      li.grid_3.center
         a(href="/newNote") Write a note
+      li.grid_3.center
+        a(href="/myEventNotes") See all the notes from my event
+      li.grid_3.center.omega
+        a(href="/clearEvent") Clear event
       div.clear
     div.clear
 
     ul#midOptions.grid_12.alpha
-      li.grid_4.center.alpha 
-        a(href="/newEvent") Create an event
-      li.grid_4.center
+      li.grid_3.center.alpha 
+        a(href="/myNotes") See all of my notes
+      li.grid_3.center
         a(href="/eventNotes") See all the notes from an event
-      li.grid_4.center.omega
+      li.grid_3.center
+        a(href="/newEvent") Create an event
+      li.grid_3.center.omega
         a(href="/userNotes") See all the notes from a specific user
       div.clear
     div.clear

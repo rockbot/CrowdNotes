@@ -44,8 +44,11 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res) {
-  res.render('index.jade', { locals:
-    { title: 'CrowdNotes' }
+  db.getMyEvent(function(err, myEvent) {
+    res.render('index.jade', { locals:
+      { title: 'CrowdNotes' 
+      , myEvent: myEvent }
+    });
   });
 });
 
@@ -125,6 +128,28 @@ app.post('/newNote', function(req, res) {
   }, function(err, docs) {
     console.log(req.user)
     res.redirect('/');  
+  });
+});
+
+app.get('/myEventNotes', function(req, res) {
+  db.getMyEvent(function(err, myEvent) {
+    if (myEvent) {
+      db.getNotesFromEvent(myEvent._id, function(err, notes) {
+        res.render('listNotes.jade', { locals:
+          { title: 'Notes from ' + myEvent.name
+          , notesList : notes }
+        });
+      });
+    } else {
+      res.redirect('/eventNotes');  
+    }
+  });
+});
+
+app.get('/clearEvent', function(req, res) {
+  db.clearMyEvent(function(err) {
+    console.log('event cleared!');
+    res.redirect('/');
   });
 });
 
