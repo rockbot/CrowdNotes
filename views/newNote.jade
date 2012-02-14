@@ -16,6 +16,7 @@ div.container_12
         - if (myEvent) 
           p My Event: #{myEvent.name} 
             a(href='/setEvent') Change Event
+          input(type='hidden', name='eventid', value='#{myEvent._id}')
         - else
           label(for='eventid') Event:
           br
