@@ -54,14 +54,12 @@ app.get('/', function(req, res) {
 
 app.get('/newNote', function(req, res) {
   db.getEvents(function(err, events) {
-    db.getUsers(function(err, users) {
-      db.getMyEvent(function(err, myEvent) {
-        res.render('newNote.jade', { locals:
-          { title: 'Write a Note!' 
-          , myEvent: myEvent
-          , currentEvents: events 
-          , currentNames: users }
-        });
+    db.getMyEvent(function(err, myEvent) {
+      res.render('newNote.jade', { locals:
+        { title: 'Write a Note!' 
+        , myEvent: myEvent
+        , currentEvents: events 
+        , currentNames: users }
       });
     });
   });
