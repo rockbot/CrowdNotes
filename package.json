@@ -3,10 +3,13 @@
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
-      "express": "2.5.5"
+      "express": ">= 2.5.5"
     , "stylus": ">= 0.0.1"
     , "jade": ">= 0.0.1"
     , "mongodb": ">= 0.9.7-3-5"
     , "mongoose": ">= 2.4.10"
+    , "everyauth": ">= 0.2.30"
+    , "mongoose-auth": ">= 0.0.12"
+    , "socket.io": ">= 0.8.7"
   }
 }
