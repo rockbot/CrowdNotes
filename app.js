@@ -18,6 +18,15 @@ var app = module.exports = express.createServer();
 
 var db = new DB('mongodb://localhost/CrowdNotes');
 
+var io = require('socket.io').listen(app);
+
+io.sockets.on('connection', function(socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
 // Configuration
 
 app.configure(function(){
@@ -53,13 +62,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/newNote', function(req, res) {
-  db.getEvents(function(err, events) {
-    db.getMyEvent(function(err, myEvent) {
+  db.getMyEvent(function(err, myEvent) {
+    console.log('event: ' + myEvent);
+    db.getNotesFromEvent(myEvent.id, function(error, notes) { 
       res.render('newNote.jade', { locals:
         { title: 'Write a Note!' 
         , myEvent: myEvent
-        , currentEvents: events 
-        , currentNames: users }
+        , currentNotes: notes }
       });
     });
   });
@@ -125,7 +134,7 @@ app.post('/newNote', function(req, res) {
   , eventid  : req.param('eventid')
   }, function(err, docs) {
     console.log(req.user)
-    res.redirect('/');  
+    res.redirect('/newNote');  
   });
 });
 

@@ -1,4 +1,5 @@
 title= title
+
 div.container_12
   h2#header.grid_9.alpha Welcome to #{title}!
   - if (!everyauth.loggedIn)
@@ -26,29 +27,30 @@ div.container_12
     div.clear
 
     - if (myEvent)
-      p.grid_12.center.alpha My Event: #{myEvent.name}
+      p.grid_12.center.alpha My Event: #{myEvent.name} 
+        a(href="/setEvent") Change Your Event
+      div.clear
+    - else
+      p.grid_12.center.alpha 
+        a(href="/setEvent") Step 1: Set Your Event
       div.clear
 
     ul#topOptions.grid_12.alpha 
-      li.grid_3.center.alpha
-        a(href="/setEvent") Set my event
-      li.grid_3.center
+      li.grid_4.center.alpha
         a(href="/newNote") Write a note
-      li.grid_3.center
+      li.grid_4.center
         a(href="/myEventNotes") See all the notes from my event
-      li.grid_3.center.omega
-        a(href="/clearEvent") Clear event
+      li.grid_4.center.omega
+        a(href="/myNotes") See all of my notes
       div.clear
     div.clear
 
     ul#midOptions.grid_12.alpha
-      li.grid_3.center.alpha 
-        a(href="/myNotes") See all of my notes
-      li.grid_3.center
+      li.grid_4.center.alpha 
         a(href="/eventNotes") See all the notes from an event
-      li.grid_3.center
+      li.grid_4.center
         a(href="/newEvent") Create an event
-      li.grid_3.center.omega
+      li.grid_4.center.omega
         a(href="/userNotes") See all the notes from a specific user
       div.clear
     div.clear

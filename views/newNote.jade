@@ -1,4 +1,12 @@
-title Create an Event!
+script(src='/socket.io/socket.io.js') 
+script
+  var socket = io.connect('http://localhost');        
+  socket.on('news', function (data) {                 
+    console.log(data);
+    socket.emit('my other event', {my: 'data'});
+  });
+
+title Write a New Note!
 div.container_12
   h2#header.grid_12 CrowdNotes - Write a Note!
   div.clear
@@ -13,17 +21,14 @@ div.container_12
         textarea(id='note', name="note", rows="15", cols="30")
       br
       div
-        - if (myEvent) 
-          p My Event: #{myEvent.name} 
-            a(href='/setEvent') Change Event
-          input(type='hidden', name='eventid', value='#{myEvent._id}')
-        - else
-          label(for='eventid') Event:
-          br
-          select(id='eventid', name='eventid')
-            each event in currentEvents
-              option(value="#{event._id}")= event.name
+        p My Event: #{myEvent.name} 
+          a(href='/setEvent') Change Event
+        input(type='hidden', name='eventid', value='#{myEvent._id}')
       br
       div
         input(type="submit", value="Save My Note!")
+  div.grid_8
+    h3 Current Notes From This Event
+    div.currentNotes
+      p= currentNotes.length
   div.clear
