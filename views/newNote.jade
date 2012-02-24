@@ -28,7 +28,12 @@ div.container_12
       div
         input(type="submit", value="Save My Note!")
   div.grid_8
-    h3 Current Notes From This Event
+    h5 Current Notes From This Event
     div.currentNotes
-      p= currentNotes.length
+      each note in currentNotes
+        div.grid_8
+          p.grid_1= note.date.toLocaleTimeString()
+          p.grid_5= note.body
+          div.clear
+        div.clear
   div.clear
