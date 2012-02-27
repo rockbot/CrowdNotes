@@ -64,13 +64,18 @@ app.get('/', function(req, res) {
 app.get('/newNote', function(req, res) {
   db.getMyEvent(function(err, myEvent) {
     console.log('event: ' + myEvent);
-    db.getNotesFromEvent(myEvent.id, function(error, notes) { 
-      res.render('newNote.jade', { locals:
-        { title: 'Write a Note!' 
-        , myEvent: myEvent
-        , currentNotes: notes }
+    if (myEvent) {
+      db.getNotesFromEvent(myEvent.id, function(error, notes) { 
+        res.render('newNote.jade', { locals:
+          { title: 'Write a Note!' 
+          , myEvent: myEvent
+          , currentNotes: notes }
+        });
       });
-    });
+    }
+    else {
+      res.redirect('/setEvent');
+    }
   });
 });
 
