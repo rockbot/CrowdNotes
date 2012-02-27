@@ -17,20 +17,20 @@ AccessDB = function(dbToUse) {
   mongoose.connection.on('open', function() {
     console.log('We have connected to mongodb');
   }); 
+
+  // Define class variable
+  this.myEventID = null;
 };
 
-// Define class variable
-// !! Not sure if this is correct !!
-var myEventID = null;
 
 AccessDB.prototype.getMyEvent = function(callback) {
-  Event.findOne({'_id': myEventID}, function(err, myEvent) {
+  Event.findOne({'_id': this.myEventID}, function(err, myEvent) {
     callback(null, myEvent);
   });
 }
 
 AccessDB.prototype.clearMyEvent = function(callback) {
-  myEventID = null;
+  this.myEventID = null;
   callback(null);
 }
 
@@ -157,7 +157,7 @@ AccessDB.prototype.getNotesFromEvent = function(eventid, callback) {
 }
 
 AccessDB.prototype.setEvent = function(eventid, callback) {
-  myEventID = eventid;
+  this.myEventID = eventid;
   callback(null);
 }
 
