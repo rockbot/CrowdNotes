@@ -1,28 +1,31 @@
 
+/**
+  * Module dependencies.
+  */
+
+//var everyauth = require('everyauth')
+//  , Promise = everyauth.Promise;
+
 /*
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'CrowdNotes' })
-};
+module.exports = function(app, db, everyauth) {
 
-/* 
- * GET new note page
- */
-
-exports.newNote = function(req, res){
-  res.render('newNote.jade', { locals: 
-    { title: 'Write a note!' }
+  app.get('/', function(req, res){
+    db.getMyEvent(function(err, myEvent) {
+      res.render('index.jade', { locals:
+        { title: 'CrowdNotes' 
+        , myEvent: myEvent }
+      });
+    });
   });
-};
 
-/* 
- * GET new user page
- */
-
-exports.newUser = function(req, res){
-  res.render('newUser.jade', { locals: 
-    { title: 'Create a user!' }
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
   });
+
 };
+
+

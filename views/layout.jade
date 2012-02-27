@@ -6,4 +6,12 @@ html
     link(rel='stylesheet', type='text/css', media='all', href='/stylesheets/960.css')
     link(rel='stylesheet', type='text/css', media='all', href='/stylesheets/text.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    body!= body
+  script(src='/socket.io/socket.io.js')
+  script
+    var socket = io.connect('http://localhost');
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', {my: 'data'});
+    });
+    
+  body!= body
