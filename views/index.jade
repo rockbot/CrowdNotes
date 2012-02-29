@@ -2,7 +2,7 @@ title= title
 
 div.container_12
   h2#header.grid_9.alpha Welcome to #{title}!
-  - if (!everyauth.loggedIn)
+  - if (true) //(!everyauth.loggedIn)
     div#auth.grid_3.omega Not authenticated
       br
       a(href='/login') Login
@@ -27,12 +27,7 @@ div.container_12
     div.clear
 
     - if (myEvent)
-      p.grid_12.center.alpha My Event: #{myEvent.name} 
-        a(href="/setEvent") Change Your Event
-      div.clear
-    - else
-      p.grid_12.center.alpha 
-        a(href="/setEvent") Step 1: Set Your Event
+      p.grid_12.center.alpha Current Event: #{myEvent.name}
       div.clear
 
     ul#topOptions.grid_12.alpha 

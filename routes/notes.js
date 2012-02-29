@@ -1,17 +1,14 @@
 // notes.js
 // routing for notes-related pages
 
-var everyauth = require('everyauth')
-  , Promise = everyauth.Promise;
-
 /* 
  * GET new note page
  */
 
-module.exports = function(app, db) {
+module.exports = {
 
 
-  app.get('/newNote', function(req, res){
+   getNewNote: function(req, res){
     db.getEvents(function(err, events) {
       db.getMyEvent(function(err, myEvent) {
         res.render('newNote.jade', { locals:
@@ -21,9 +18,9 @@ module.exports = function(app, db) {
         });
       });
     });
-  });
+  },
 
-  app.post('/newNote', function(req, res){
+  postNewNote: function(req, res){
     db.saveNote({
       userid   : req.user.id
     , note     : req.param('note')
@@ -32,18 +29,18 @@ module.exports = function(app, db) {
       console.log(req.user)
       res.redirect('/');  
     });
-  });
+  },
 
-  app.get('/myNotes', function(req, res){
+  getMyNotes: function(req, res){
     db.getNotesFromUser(req.user.id, function(err, notes) {
       res.render('listNotes.jade', { locals:
         { title: "Notes I've written"
         , notesList: notes }
       });
     });
-  });
+  },
 
-  app.get('/myEventNotes', function(req, res){
+  getMyEventNotes: function(req, res){
     db.getMyEvent(function(err, myEvent) {
       if (myEvent) {
         db.getNotesFromEvent(myEvent._id, function(err, notes) {
@@ -56,43 +53,43 @@ module.exports = function(app, db) {
         res.redirect('/eventNotes');  
       }
     });
-  });
+  },
 
-  app.get('/eventNotes', function(req, res){
+  getEventNotes: function(req, res){
     db.getEvents(function(err, events) {
       res.render('eventNotes.jade', { locals:
         { title: 'Get all notes from an event'
         , currentEvents: events }
       });
     });
-  });
+  },
 
-  app.post('/eventNotes', function(req, res){
+  postEventNotes: function(req, res){
     db.getNotesFromEvent(req.param('eventid'), function(err, notes) {
       res.render('listNotes.jade', { locals: 
         { title: 'Event Notes!'
         , notesList : notes }
       });
     });
-  });
+  },
 
 
-  app.get('/userNotes', function(req, res){
+  getUserNotes: function(req, res){
     db.getUsers(function(err, users) {
       res.render('userNotes.jade', { locals:
         { title: 'Get all notes from a user'
         , currentUsers: users }
       });
     });
-  });
+  },
 
-  app.post('/userNotes', function(req, res){
+  postUserNotes: function(req, res){
     db.getNotesFromUser(req.param('userid'), function(err, notes) {
       res.render('listNotes.jade', { locals: 
         { title: 'User Notes!'
         , notesList : notes }
       });
     });
-  });
+  }
 
 };

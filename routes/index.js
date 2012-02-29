@@ -10,21 +10,22 @@
  * GET home page.
  */
 
-module.exports = function(app, db, everyauth) {
 
-  app.get('/', function(req, res){
+module.exports = {
+
+  index: function(req, res){
     db.getMyEvent(function(err, myEvent) {
       res.render('index.jade', { locals:
-        { title: 'CrowdNotes' 
+        { title: 'CrowdNotes'  
         , myEvent: myEvent }
       });
     });
-  });
+  },
 
-  app.get('/logout', function(req, res){
+  logout: function(req, res){
     req.logout();
     res.redirect('/');
-  });
+  }
 
 };
 
