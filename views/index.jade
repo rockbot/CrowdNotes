@@ -2,7 +2,7 @@ title= title
 
 div.container_12
   h2#header.grid_9.alpha Welcome to #{title}!
-  - if (!everyauth.loggedIn)
+  - if (!user)
     div#auth.grid_3.omega Not authenticated
       br
       a(href='/login') Login

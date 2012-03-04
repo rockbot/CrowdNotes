@@ -7,12 +7,13 @@
 var express = require('express')
   , routes = require('./routes')
   , DB = require('./accessDB').AccessDB
-  , mongooseAuth = require('mongoose-auth');
+  , passport = require('passport');
+//  , mongooseAuth = require('mongoose-auth');
 
-var everyauth = require('everyauth')
-  , Promise = everyauth.Promise;
-
-everyauth.debug = true;
+//var everyauth = require('everyauth')
+//  , Promise = everyauth.Promise;
+//
+//everyauth.debug = true;
 
 var app = module.exports = express.createServer();
 
@@ -35,11 +36,13 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-//  app.use(app.router);
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'applecake' }));
-  app.use(mongooseAuth.middleware());
+  //app.use(mongooseAuth.middleware());
 });
 
 app.configure('development', function(){
@@ -52,10 +55,19 @@ app.configure('production', function(){
 
 // Routes
 
+app.get('/login', function(req, res) {
+  res.render('login.jade');
+});
+
+app.post('/login',
+  passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login'})
+);
+
 app.get('/', function(req, res) {
   db.getMyEvent(function(err, myEvent) {
     res.render('index.jade', { locals:
       { title: 'CrowdNotes' 
+      , user: req.user
       , myEvent: myEvent }
     });
   });
@@ -194,7 +206,7 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-mongooseAuth.helpExpress(app);
+//mongooseAuth.helpExpress(app);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
