@@ -7,30 +7,39 @@
 
 module.exports = {
 
-
-   getNewNote: function(req, res){
-    db.getEvents(function(err, events) {
-      db.getMyEvent(function(err, myEvent) {
-        res.render('newNote.jade', { locals:
-          { title: 'Write a Note!' 
-          , myEvent: myEvent
-          , currentEvents: events }
+  // app.get('/newNote'...)
+  getNewNote: function(req, res) {
+    db.getMyEvent(function(err, myEvent) {
+      console.log('event: ' + myEvent);
+      if (myEvent) {
+        db.getNotesFromEvent(myEvent.id, function(error, notes) { 
+          res.render('newNote.jade', { locals:
+            { title: 'Write a Note!' 
+            , myEvent: myEvent
+            , currentUser: req.user
+            , currentNotes: notes }
+          });
         });
-      });
+      }
+      else {
+        res.redirect('/setEvent');
+      }
     });
   },
 
+  // app.post('/newNote'...)
   postNewNote: function(req, res){
     db.saveNote({
       userid   : req.user.id
     , note     : req.param('note')
     , eventid  : req.param('eventid')
     }, function(err, docs) {
-      console.log(req.user)
-      res.redirect('/');  
+      //console.log(req.user)
+      res.redirect('/newNote');  
     });
   },
 
+  // app.get('/myNotes'...)
   getMyNotes: function(req, res){
     db.getNotesFromUser(req.user.id, function(err, notes) {
       res.render('listNotes.jade', { locals:
@@ -40,6 +49,7 @@ module.exports = {
     });
   },
 
+  // app.get('/myEventNotes'...)
   getMyEventNotes: function(req, res){
     db.getMyEvent(function(err, myEvent) {
       if (myEvent) {
@@ -55,6 +65,7 @@ module.exports = {
     });
   },
 
+  // app.get('/eventNotes'...)
   getEventNotes: function(req, res){
     db.getEvents(function(err, events) {
       res.render('eventNotes.jade', { locals:
@@ -64,6 +75,7 @@ module.exports = {
     });
   },
 
+  // app.post('/eventNotes'...)
   postEventNotes: function(req, res){
     db.getNotesFromEvent(req.param('eventid'), function(err, notes) {
       res.render('listNotes.jade', { locals: 
@@ -73,7 +85,7 @@ module.exports = {
     });
   },
 
-
+  // app.get('/userNotes'...)
   getUserNotes: function(req, res){
     db.getUsers(function(err, users) {
       res.render('userNotes.jade', { locals:
@@ -83,6 +95,7 @@ module.exports = {
     });
   },
 
+  // app.post('/userNotes'...)
   postUserNotes: function(req, res){
     db.getNotesFromUser(req.param('userid'), function(err, notes) {
       res.render('listNotes.jade', { locals: 

@@ -3,12 +3,12 @@ var mongoose = require('mongoose');
 var	Schema = mongoose.Schema;
 
 // dependencies for authentication
-var everyauth = require('everyauth')
-  , Promise = everyauth.Promise;
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 
-everyauth.debug = true;
-
-var mongooseAuth = require('mongoose-auth');
+var Event = require('./models/event');
+var User = require('./models/user');
+var Note = require('./models/note');
 
 // connect to database
 AccessDB = function(dbToUse) {
@@ -22,6 +22,25 @@ AccessDB = function(dbToUse) {
   this.myEventID = null;
 };
 
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+  },
+  function(email, password, done) {
+    User.authenticate(email, password, function(err, user) {
+      return done(err, user);
+    });
+  }
+));
+      
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 
 AccessDB.prototype.getMyEvent = function(callback) {
   Event.findOne({'_id': this.myEventID}, function(err, myEvent) {
@@ -34,63 +53,13 @@ AccessDB.prototype.clearMyEvent = function(callback) {
   callback(null);
 }
 
-// Define schema
-var EventSchema = new Schema({
-    name    	: String
-  , date	: { type: Date, default: Date.now }
-  , description : String
-  , hashtag : String // need to verify it starts with '#'
-});
-
-var UserSchema = new Schema({})
-  , User;
-
-UserSchema.plugin(mongooseAuth, {
-  everymodule: {
-    everyauth: {
-      User: function () {
-        return User;
-      }
-    }
-  }
-, password: {
-    loginWith: 'email'
-  , extraParams: {
-      name: {
-        first: String
-      , last: String 
-      }
-    }
-  , everyauth: {
-      getLoginPath: '/login'
-    , postLoginPath: '/login'
-    , loginView: 'login.jade'
-    , getRegisterPath: '/register'
-    , postRegisterPath: '/register'
-    , registerView: 'register.jade'
-    , loginSuccessRedirect: '/'
-    , registerSuccessRedirect: '/'
-    }
-  }
-});
-
-var NoteSchema = new Schema({
-    _user	: { type: Schema.ObjectId, ref: 'User' }
-  , body	: String
-  , date	: { type: Date, default: Date.now }
-  , _event	: { type: Schema.ObjectId, ref: 'Event' }
-});
-
-// define models
-var Note = mongoose.model('Note', NoteSchema);
-User = mongoose.model('User', UserSchema);
-var Event = mongoose.model('Event', EventSchema);
-
 // define prototypes
 AccessDB.prototype.saveUser = function(userInfo, callback) {
+  //console.log(userInfo['fname']);
   var newUser = new User ({
-    name : userInfo.name
+    name : { first: userInfo.fname, last: userInfo.lname }
   , email: userInfo.email
+  , password: userInfo.password
   });
 
   newUser.save(function(err) {
@@ -171,9 +140,5 @@ AccessDB.prototype.getNotesFromUser = function(userid, callback) {
     callback(null, notes);
   })
 }
-
-everyauth.everymodule.findUserById( function(userId, callback) {
-  User.findById(userId,callback);
-});
 
 exports.AccessDB = AccessDB;

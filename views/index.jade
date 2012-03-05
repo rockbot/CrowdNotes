@@ -2,50 +2,17 @@ title= title
 
 div.container_12
   h2#header.grid_9.alpha Welcome to #{title}!
-  - if (true) //(!everyauth.loggedIn)
-    div#auth.grid_3.omega Not authenticated
-      br
-      a(href='/login') Login
-      br
-      a(href='/register') Register
-    div.clear
+  div#auth.grid_3.omega Not authenticated
+    br
+    a(href='/login') Login
+    br
+    a(href='/register') Register
+  div.clear
     
-    div.grid_4.center.alpha
-      h3 About CrowdNotes
-    div.grid_4.center
-      h3 Something
-    div.grid_4.center.omega
-      h3 Something else
+  div.grid_4.center.alpha
+    h3 About CrowdNotes
+  div.grid_4.center
+    h3 Something
+  div.grid_4.center.omega
+    h3 Something else
 
-  - else
-    div#auth.grid_3.omega Authenticated
-      br
-      br
-      a(href='/logout') Logout
-    div.clear
-    p.grid_12.center.alpha Hi, #{everyauth.user.name.first}! What would you like to do today?
-    div.clear
-
-    - if (myEvent)
-      p.grid_12.center.alpha Current Event: #{myEvent.name}
-      div.clear
-
-    ul#topOptions.grid_12.alpha 
-      li.grid_4.center.alpha
-        a(href="/newNote") Write a note
-      li.grid_4.center
-        a(href="/myEventNotes") See all the notes from my event
-      li.grid_4.center.omega
-        a(href="/myNotes") See all of my notes
-      div.clear
-    div.clear
-
-    ul#midOptions.grid_12.alpha
-      li.grid_4.center.alpha 
-        a(href="/eventNotes") See all the notes from an event
-      li.grid_4.center
-        a(href="/newEvent") Create an event
-      li.grid_4.center.omega
-        a(href="/userNotes") See all the notes from a specific user
-      div.clear
-    div.clear
