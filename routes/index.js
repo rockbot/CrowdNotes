@@ -2,23 +2,15 @@
 /**
   * Module dependencies.
   */
-
-//var everyauth = require('everyauth')
-//  , Promise = everyauth.Promise;
-
-/*
- * GET home page.
- */
+var db = require('../accessDB');
 
 
 module.exports = {
 
   // app.get('/'...)
-  index: function(req, res){
-    db.getMyEvent(function(err, myEvent) {
-      res.render('index.jade', { locals:
-        { title: 'CrowdNotes' }
-      });
+  index: function(req, res) {
+    res.render('index.jade', { locals:
+      { title: 'CrowdNotes' }
     });
   },
 

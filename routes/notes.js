@@ -1,6 +1,8 @@
 // notes.js
 // routing for notes-related pages
 
+var db = require('../accessDB');
+
 /* 
  * GET new note page
  */

@@ -7,14 +7,16 @@
 var express = require('express')
   , routes = require('./routes')
   , DB = require('./accessDB').AccessDB
-  , passport = require('passport');
+  , passport = require('passport')
+  , mongoose = require('mongoose')
+  , mongoStore = require('connect-mongodb');
 
 var app = module.exports = express.createServer();
 global.app = app;
 
-var DB = require('./accessDB').AccessDB;
+var DB = require('./accessDB');
 var conn = 'mongodb://localhost/CrowdNotes';
-var db = new DB(conn);
+var db;
 
 //var io = require('socket.io').listen(app);
 //
@@ -34,12 +36,18 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-  app.use(express.session({ secret: 'applecake' }));
+  app.use(express.session({ 
+    store: mongoStore(conn)
+  , secret: 'applecake'
+  }, function() {
+    app.use(app.router);
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
+
+db = new DB.startup(conn);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 

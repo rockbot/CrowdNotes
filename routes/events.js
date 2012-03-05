@@ -1,3 +1,4 @@
+var db = require('../accessDB');
 
 module.exports = {
 
