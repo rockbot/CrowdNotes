@@ -8,12 +8,6 @@ var express = require('express')
   , routes = require('./routes')
   , DB = require('./accessDB').AccessDB
   , passport = require('passport');
-//  , mongooseAuth = require('mongoose-auth');
-
-//var everyauth = require('everyauth')
-//  , Promise = everyauth.Promise;
-//
-//everyauth.debug = true;
 
 var app = module.exports = express.createServer();
 
@@ -33,16 +27,15 @@ io.sockets.on('connection', function(socket) {
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
+  app.use(express.session({ secret: 'applecake' }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'applecake' }));
-  //app.use(mongooseAuth.middleware());
 });
 
 app.configure('development', function(){
@@ -60,14 +53,34 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/login',
-  passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login'})
+  passport.authenticate('local', { 
+    successRedirect: '/account', 
+    failureRedirect: '/login'
+  })
 );
 
+app.get('/register', function(req, res) {
+  res.render('register.jade');
+});
+
 app.get('/', function(req, res) {
+  res.render('index.jade', { locals:
+    { title: 'CrowdNotes' } 
+  });
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
+
+app.get('/account', ensureAuthenticated, function(req, res) {
   db.getMyEvent(function(err, myEvent) {
-    res.render('index.jade', { locals:
+    console.log(req);
+    console.log(req.user);
+    res.render('account.jade', { locals:
       { title: 'CrowdNotes' 
-      , user: req.user
+      , currentUser: req.user
       , myEvent: myEvent }
     });
   });
@@ -81,6 +94,7 @@ app.get('/newNote', function(req, res) {
         res.render('newNote.jade', { locals:
           { title: 'Write a Note!' 
           , myEvent: myEvent
+          , currentUser: req.user
           , currentNotes: notes }
         });
       });

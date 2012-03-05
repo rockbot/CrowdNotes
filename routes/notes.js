@@ -1,9 +1,6 @@
 // notes.js
 // routing for notes-related pages
 
-var everyauth = require('everyauth')
-  , Promise = everyauth.Promise;
-
 /* 
  * GET new note page
  */

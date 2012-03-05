@@ -1,6 +1,3 @@
-var everyauth = require('everyauth')
-  , Promise = everyauth.Promise;
-
 module.exports = function(app, db) {
 
   app.get('/newEvent', function(req, res){
