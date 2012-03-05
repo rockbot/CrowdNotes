@@ -55,9 +55,11 @@ AccessDB.prototype.clearMyEvent = function(callback) {
 
 // define prototypes
 AccessDB.prototype.saveUser = function(userInfo, callback) {
+  //console.log(userInfo['fname']);
   var newUser = new User ({
-    name : userInfo.name
+    name : { first: userInfo.fname, last: userInfo.lname }
   , email: userInfo.email
+  , password: userInfo.password
   });
 
   newUser.save(function(err) {

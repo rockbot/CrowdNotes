@@ -76,8 +76,6 @@ function ensureAuthenticated(req, res, next) {
 
 app.get('/account', ensureAuthenticated, function(req, res) {
   db.getMyEvent(function(err, myEvent) {
-    console.log(req);
-    console.log(req.user);
     res.render('account.jade', { locals:
       { title: 'CrowdNotes' 
       , currentUser: req.user
@@ -154,7 +152,7 @@ app.post('/newEvent', function(req, res) {
   , date : req.param('eventdate')
   , desc : req.param('eventdesc')
   }, function(err, docs) {
-    res.redirect('/');
+    res.redirect('/account');
   });
 });
 
@@ -166,6 +164,17 @@ app.post('/newNote', function(req, res) {
   }, function(err, docs) {
     console.log(req.user)
     res.redirect('/newNote');  
+  });
+});
+
+app.post('/register', function(req, res) {
+  db.saveUser({
+    fname : req.param('name.first')
+  , lname : req.param('name.last')
+  , email : req.param('email')
+  , password : req.param('password')
+  }, function(err,docs) {
+    res.redirect('/account');
   });
 });
 
@@ -187,7 +196,7 @@ app.get('/myEventNotes', function(req, res) {
 app.get('/clearEvent', function(req, res) {
   db.clearMyEvent(function(err) {
     console.log('event cleared!');
-    res.redirect('/');
+    res.redirect('/account');
   });
 });
 
