@@ -12,7 +12,7 @@ module.exports = {
   // app.get('/newNote'...)
   getNewNote: function(req, res) {
     db.getMyEvent(function(err, myEvent) {
-      console.log('event: ' + myEvent);
+      //console.log('event: ' + myEvent);
       if (myEvent) {
         db.getNotesFromEvent(myEvent.id, function(error, notes) { 
           res.render('newNote.jade', { locals:

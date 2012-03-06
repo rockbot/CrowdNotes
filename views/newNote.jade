@@ -1,10 +1,15 @@
 //script(src='/socket.io/socket.io.js') 
 //script
 //  var socket = io.connect('http://localhost');        
-//  socket.on('news', function (data) {                 
-//    console.log(data);
-//    socket.emit('my other event', {my: 'data'});
+//  socket.on('connect', function () {                 
+//    $('#notesList').addClass('connected');
 //  });
+//
+//  socket.on('user note', message);
+//
+//  function message(from, msg) {
+//    $('#lines').append($('<p>').append($('<b>').text(from), msg));
+//  }
 
 title Write a New Note!
 p 
@@ -31,6 +36,7 @@ div.container_12
         input(type="submit", value="Save My Note!")
   div.grid_8
     h5 Current Notes From This Event
+    //#notesList
     div.currentNotes
       each note in currentNotes
         div.grid_8

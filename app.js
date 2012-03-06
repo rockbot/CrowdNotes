@@ -18,17 +18,16 @@ var DB = require('./accessDB');
 var conn = 'mongodb://localhost/CrowdNotes';
 var db;
 
+// SocketIO Configuration
 //var io = require('socket.io').listen(app);
 //
 //io.sockets.on('connection', function(socket) {
-//  socket.emit('news', { hello: 'world' });
-//  socket.on('my other event', function (data) {
-//    console.log(data);
+//  socket.on('user note', function (note) {
+//    console.log(note);
 //  });
 //});
 
 // Configuration
-
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
