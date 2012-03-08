@@ -7,8 +7,6 @@ div
 
   form(method='post')
     div.center
-      label(for='eventid') Event:
-      br
       select(id='eventid', name='eventid')
         each event in currentEvents
           option(value='#{event._id}')= event.name
