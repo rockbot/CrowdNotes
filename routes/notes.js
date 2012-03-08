@@ -9,6 +9,11 @@ var db = require('../accessDB');
 
 module.exports = {
 
+  // app.get('/reviewNotes,...
+  reviewNotes: function(req, res) {
+    res.render('reviewNotes.jade');
+  },
+
   // app.get('/newNote'...)
   getNewNote: function(req, res) {
     db.getMyEvent(function(err, myEvent) {

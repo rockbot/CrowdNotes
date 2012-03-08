@@ -7,15 +7,17 @@ a {
 }
 #header {
   outline: 1px solid #000;
-  height: 60px;
-  padding-top: 30px;
+  height: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 26.666666666666668px;
   text-align: center;
 }
-#auth {
+.button {
   outline: 1px solid #000;
-  height: 60px;
+  height: 40px;
   padding-top: 20px;
-  padding-bottom: 10px;
+  margin-bottom: 13.333333333333334px;
   text-align: center;
 }
 .title {
@@ -25,20 +27,29 @@ a {
 }
 .center {
   text-align: center;
-  height: 30px;
-  padding-top: 15px;
+  height: 40px;
+  padding-top: 20px;
+  margin-bottom: 20px;
   outline: 1px solid #000;
 }
-#topOptions,
-#midOptions {
-  display: inline-block;
+.options {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .notesList {
   list-style-type: none;
 }
 .note {
   list-style-type: none;
-  display: inline-block;
+  display: inline;
+}
+.note float,
+.note .name {
+  color: #00f;
+}
+.note .event {
+  color: #008000;
 }
 .hidden {
   visibility: hidden;

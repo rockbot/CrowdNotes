@@ -20,16 +20,21 @@ module.exports = function(app) {
   app.get('/register', start.getRegister);
   app.post('/register', start.postRegister);
 
+  app.get('/about', start.about);
+
   app.get('/login', start.login);
-  app.post('/login', passport.authenticate('local', { 
-    successRedirect: '/account', 
-    failureRedirect: '/login'
-  })
-);
+  app.post('/login', passport.authenticate('local', 
+    { 
+      successRedirect: '/account', 
+      failureRedirect: '/login'
+    })
+  );
 
   app.get('/account', ensureAuthenticated, start.getAccount);
 
   app.get('/logout', start.logout);
+
+  app.get('/reviewNotes', notes.reviewNotes);
 
   app.get('/newNote', notes.getNewNote);
   app.post('/newNote', notes.postNewNote);

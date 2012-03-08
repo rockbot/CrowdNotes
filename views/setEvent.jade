@@ -1,20 +1,19 @@
-title= title
+title Set Your Event
 
-p 
-  a(href='/account') HOME
-div.container_12
+div
+  div#header
+    h2 CrowdNotes
+    p Pick Your Event
 
-  h2.grid_4 Pick your event:
-  div.clear
-
-  form.grid_4(method='post')
-    div
+  form(method='post')
+    div.center
       label(for='eventid') Event:
       br
       select(id='eventid', name='eventid')
         each event in currentEvents
           option(value='#{event._id}')= event.name
-    br
-    div
+    div.button
       input(type='submit', value='Set My Event!')
-  div.clear
+
+div.button 
+  a(href='/account') HOME
