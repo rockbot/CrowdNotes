@@ -34,26 +34,26 @@ module.exports = function(app) {
 
   app.get('/logout', start.logout);
 
-  app.get('/reviewNotes', notes.reviewNotes);
+  app.get('/reviewNotes', ensureAuthenticated, notes.reviewNotes);
 
-  app.get('/newNote', notes.getNewNote);
-  app.post('/newNote', notes.postNewNote);
+  app.get('/newNote', ensureAuthenticated, notes.getNewNote);
+  app.post('/newNote', ensureAuthenticated, notes.postNewNote);
   
-  app.post('/myNotes', notes.getMyNotes);
+  app.get('/myNotes', ensureAuthenticated, notes.getMyNotes);
   
-  app.get('/myEventNotes', notes.getMyEventNotes);
+  app.get('/myEventNotes', ensureAuthenticated, notes.getMyEventNotes);
 
-  app.get('/eventNotes', notes.getEventNotes);
-  app.post('/eventNotes', notes.postEventNotes);
+  app.get('/eventNotes', ensureAuthenticated, notes.getEventNotes);
+  app.post('/eventNotes', ensureAuthenticated, notes.postEventNotes);
 
-  app.get('/userNotes', notes.getUserNotes);
-  app.post('/userNotes', notes.postUserNotes);
+  app.get('/userNotes', ensureAuthenticated, notes.getUserNotes);
+  app.post('/userNotes', ensureAuthenticated, notes.postUserNotes);
 
-  app.get('/newEvent', events.getNewEvent);
-  app.post('/newEvent', events.postNewEvent);
+  app.get('/newEvent', ensureAuthenticated, events.getNewEvent);
+  app.post('/newEvent', ensureAuthenticated, events.postNewEvent);
 
-  app.get('/setEvent', events.getSetEvent);
-  app.post('/setEvent', events.postSetEvent);
+  app.get('/setEvent', ensureAuthenticated, events.getSetEvent);
+  app.post('/setEvent', ensureAuthenticated, events.postSetEvent);
 
-  app.get('/clearEvent', events.clearEvent);  
+  app.get('/clearEvent', ensureAuthenticated, events.clearEvent);  
 }

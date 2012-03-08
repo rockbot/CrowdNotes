@@ -1,18 +1,18 @@
-title Create an Event!
-p 
-  a(href='/account') HOME
-div.container_12
-  h2#header.grid_12 CrowdNotes - Review all notes from a specific user!
-  div.clear
+title Review Notes from Another User
 
-  div.grid_4
+div
+  div#header 
+    h2 CrowdNotes 
+    p Review all notes from a specific user!
+
+  div
     form(method='post')
-      div
-        label(for='userid') Name of User: 
+      div.center
         select(id='userid', name='userid')
           each user in currentUsers 
             option(value='#{user._id}') #{user.name.first} #{user.name.last}
-      br
-      div
+      div.button
         input(type='submit', value='Get the notes!')
 
+div.button 
+  a(href='/account') HOME

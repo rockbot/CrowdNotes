@@ -13,7 +13,7 @@ module.exports = {
   postNewEvent: function(req, res){
     db.saveEvent({
       name : req.param('eventname')
-    , date : req.param('eventdate')
+    , date : new Date(req.param('eventyear'), req.param('eventmonth'), req.param('eventdate'))
     , desc : req.param('eventdesc')
     }, function(err, docs) {
       res.redirect('/account');
