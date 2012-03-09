@@ -4,17 +4,23 @@ body
 a
   color #00B7FF
 
+// height for boxes
+header_height = 80px
+button_height = 40px
+
 #header
   outline 1px solid black
-  height h = 60px
-  padding-top (h / 2) 
+  height header_height
+  padding-top (header_height / 8) 
+  padding-bottom (header_height / 8)
+  margin-bottom (header_height / 3)
   text-align center
 
-#auth
+.button
   outline 1px solid black
-  height h = 60px
-  padding-top (h / 3)
-  padding-bottom (h / 6)
+  height button_height
+  padding-top (button_height/ 2)
+  margin-bottom (button_height/ 3)
   text-align center
 
 .title
@@ -25,20 +31,27 @@ a
 
 .center
   text-align center
-  height h = 30px
+  height h = button_height
   padding-top (h / 2)  
+  margin-bottom (h / 2)
   outline 1px solid black
 
-#topOptions, #midOptions
-  display inline-block
+.options
+  list-style-type none
+  margin 0
+  padding 0
 
 .notesList
   list-style-type none
 
 .note
   list-style-type none 
-  display inline-block
-
+  display inline
+  float
+  .name 
+    color blue
+  .event
+    color green
 
 .hidden
   visibility hidden

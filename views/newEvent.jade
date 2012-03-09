@@ -1,31 +1,29 @@
 title Create an Event!
-p 
-  a(href='/account') HOME
-div.container_12
-  h2#header.grid_12 CrowdNotes - Create an Event!
-  div.clear
 
-  div.grid_4
+div
+  div#header
+    h2 CrowdNotes 
+    p Create an Event!
+
+  div
     form(method='post')
-      div
-        label(for='eventname') Name of Event:
-        br
-        input(id='eventname', type='text', name='eventname', size='20')
-      br
-      div
-        label(for='eventdate') Date:
-        br
-        input(id='eventdate', type='date', name='eventdate')
-      br
-      div
-        label(for='eventdesc') Description:
-        br
-        input(id='eventdesc', type='text', name='eventdesc')
-      br
-      div
-        label(for='eventhash') Hashtag:
-        br
-        input(id='eventhash', type='text', name='eventhash')
-      br
-      div
+      div.center
+        input(id='eventname', type='text', name='eventname', size='20', placeholder='Event Name')
+      div.center
+        select(id='eventmonth', name='eventmonth')
+          months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+          each month, i in months
+            option(value=(i))= month
+        select(id='eventdate', name='eventdate')
+          - for (i=1;i<31;i++)
+            option(value=i)= i
+         input(id='eventyear', type='text', name='eventyear', value='2012', size='4') 
+      div.center
+        input(id='eventdesc', type='text', name='eventdesc', placeholder='Description')
+      div.center
+        input(id='eventhash', type='text', name='eventhash', placeholder='hashtag')
+      div.button
         input(type='submit', value='Save my Event!')
+
+div.button 
+  a(href='/account') HOME

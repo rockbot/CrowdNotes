@@ -31,6 +31,11 @@ module.exports = {
     });
   },
 
+  // app.get('/about', ...
+  about: function(req, res) {
+    res.render('about.jade');
+  },
+
   // app.get('/login', ...
   login: function(req, res) {
     res.render('login.jade');

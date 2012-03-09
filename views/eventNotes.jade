@@ -1,18 +1,16 @@
-title Create an Event!
-p 
-  a(href='/account') HOME
-div.container_12
-  h2#header.grid_12 CrowdNotes - Review all notes from a specific event!
-  div.clear
+title Review Event Notes
+div
+  div#header 
+    h2 CrowdNotes 
+    p Review all notes from a specific event!
 
-  div.grid_4
-    form(method='post')
-      div
-        label(for='eventid') Name of Event:
-        select(id='eventid', name='eventid')
-          each event in currentEvents 
-            option(value='#{event._id}')= event.name
-      br
-      div
-        input(type='submit', value='Get the notes!')
-  div.clear
+  form(method='post')
+    div.center
+      select(id='eventid', name='eventid')
+        each event in currentEvents 
+          option(value='#{event._id}')= event.name
+    div.button
+      input(type='submit', value='Get the notes!')
+
+div.button
+  a(href='/account') HOME

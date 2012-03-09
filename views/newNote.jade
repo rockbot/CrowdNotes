@@ -12,36 +12,32 @@
 //  }
 
 title Write a New Note!
-p 
-  a(href='/account') HOME
-div.container_12
-  h2#header.grid_12 CrowdNotes - Write a Note!
-  div.clear
-
-  div.grid_4
-    p Hi, #{currentUser.name.first}!
-    p What are you learning?
+div
+  div#header
+    h2 CrowdNotes
+    p Note for 
+      strong #{myEvent.name} 
+      a(href='/setEvent') 
+        em Change Event
+  div
     form(method='post')
       div
-        label(for='note') Note: 
-        br
-        textarea(id='note', name="note", rows="15", cols="30")
-      br
-      div
-        p My Event: #{myEvent.name} 
-          a(href='/setEvent') Change Event
+        textarea(id='note', name="note", rows="15", cols="100%", placeholder='What are you learning, #{currentUser.name.first}?')
         input(type='hidden', name='eventid', value='#{myEvent._id}')
       br
-      div
+      div.button
         input(type="submit", value="Save My Note!")
-  div.grid_8
-    h5 Current Notes From This Event
+  div
+    h3 Current Notes From This Event
     //#notesList
     div.currentNotes
-      each note in currentNotes
-        div.grid_8
-          p.grid_1= note.date.toLocaleTimeString()
-          p.grid_5= note.body
-          div.clear
-        div.clear
-  div.clear
+      - if (currentNotes.length === 0)
+        p Your note could be the first!
+      - else
+        each note in currentNotes
+          div
+            p= note.date.toLocaleTimeString()
+            p= note.body
+
+div.button 
+  a(href='/account') HOME

@@ -1,16 +1,19 @@
 title Login to CrowdNotes
-div.container_12
-  div.grid_4
+
+div
+  div#header
+    h2 CrowdNotes
+    p Log In
+
+  div
     form(action='/login', method='POST')
-      #login
+      #login.center
         label.title(for='email') Email
         br
         input(type='text', name='email')
-      br
-      #password
+      #password.center
         label(for='password').title Password
         br
         input(type='password', name='password')
-      #submit
+      #submit.button
         input(type='submit', value='Log Me In!') Login
-  div.clear
