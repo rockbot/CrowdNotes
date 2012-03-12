@@ -85,14 +85,12 @@ textarea {
 .time {
   color: #00f;
   display: inline-block;
-  outline: 1px solid #000;
   float: right;
   clear: right;
 }
 .body {
   display: inline-block;
   color: #f00;
-  outline: 1px solid #f00;
   width: 85%;
 }
 .user {
