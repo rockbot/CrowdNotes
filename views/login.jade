@@ -8,12 +8,8 @@ div
   div
     form(action='/login', method='POST')
       #login.center
-        label.title(for='email') Email
-        br
-        input(type='text', name='email')
+        input(type='text', name='email', placeholder='email@email.com')
       #password.center
-        label(for='password').title Password
-        br
-        input(type='password', name='password')
+        input(type='password', name='password', placeholder='password')
       #submit.button
         input(type='submit', value='Log Me In!') Login

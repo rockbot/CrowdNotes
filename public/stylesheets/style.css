@@ -6,15 +6,21 @@ a {
   color: #00b7ff;
 }
 #header {
-  outline: 1px solid #000;
+  border: 2px solid #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
   height: 80px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 26.666666666666668px;
+  margin-bottom: 13.333333333333334px;
   text-align: center;
 }
 .button {
-  outline: 1px solid #000;
+  border: 2px solid #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
   height: 40px;
   padding-top: 20px;
   margin-bottom: 13.333333333333334px;
@@ -30,7 +36,10 @@ a {
   height: 40px;
   padding-top: 20px;
   margin-bottom: 20px;
-  outline: 1px solid #000;
+  border: 2px solid #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .options {
   list-style-type: none;
@@ -53,4 +62,40 @@ a {
 }
 .hidden {
   visibility: hidden;
+}
+.boxsizing_border {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+textarea {
+  margin: 0 auto;
+  width: 100%;
+  color: #000;
+  border: 2px solid #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.currentNote {
+  margin-bottom: 40px;
+}
+.time {
+  color: #00f;
+  display: inline-block;
+  outline: 1px solid #000;
+  float: right;
+  clear: right;
+}
+.body {
+  display: inline-block;
+  color: #f00;
+  outline: 1px solid #f00;
+  width: 85%;
+}
+.user {
+  float: right;
+  margin-bottom: 10px;
 }

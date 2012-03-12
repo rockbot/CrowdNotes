@@ -1,3 +1,9 @@
+// border-radius
+border-radius()
+  -webkit-border-radius arguments
+  -moz-border-radius arguments
+  border-radius arguments
+
 body
   padding 50px
   font 14px "Lucida Grande", Helvetica, Arial, sans-serif
@@ -9,15 +15,17 @@ header_height = 80px
 button_height = 40px
 
 #header
-  outline 1px solid black
+  border 2px solid black
+  border-radius 10px
   height header_height
   padding-top (header_height / 8) 
   padding-bottom (header_height / 8)
-  margin-bottom (header_height / 3)
+  margin-bottom (button_height / 3)
   text-align center
 
 .button
-  outline 1px solid black
+  border 2px solid black
+  border-radius 10px
   height button_height
   padding-top (button_height/ 2)
   margin-bottom (button_height/ 3)
@@ -34,7 +42,8 @@ button_height = 40px
   height h = button_height
   padding-top (h / 2)  
   margin-bottom (h / 2)
-  outline 1px solid black
+  border 2px solid black
+  border-radius 10px
 
 .options
   list-style-type none
@@ -56,3 +65,36 @@ button_height = 40px
 .hidden
   visibility hidden
 
+.boxsizing_border 
+  box-sizing border-box
+  -webkit-box-sizing border-box
+  -moz-box-sizing border-box
+  -ms-box-sizing border-box
+
+textarea
+  margin 0 auto
+  width 100%
+  color black
+  border 2px solid black
+  border-radius 10px
+  padding 10px
+
+.currentNote
+  margin-bottom 40px
+
+.time
+  color blue
+  display inline-block
+  outline 1px solid black
+  float right
+  clear right
+
+.body
+  display inline-block
+  color red
+  outline 1px solid red
+  width 85%
+
+.user
+  float right
+  margin-bottom 10px

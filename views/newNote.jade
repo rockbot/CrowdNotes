@@ -22,7 +22,7 @@ div
   div
     form(method='post')
       div
-        textarea(id='note', name="note", rows="15", cols="100%", placeholder='What are you learning, #{currentUser.name.first}?')
+        textarea.boxsizing_border(id='note', name="note", rows="15", cols="50", placeholder='What are you learning, #{currentUser.name.first}?')
         input(type='hidden', name='eventid', value='#{myEvent._id}')
       br
       div.button
@@ -30,14 +30,15 @@ div
   div
     h3 Current Notes From This Event
     //#notesList
-    div.currentNotes
+    div
       - if (currentNotes.length === 0)
-        p Your note could be the first!
+        p There are no notes for this event yet
       - else
         each note in currentNotes
-          div
-            p= note.date.toLocaleTimeString()
-            p= note.body
+          div.currentNote
+            div.body= note.body
+            div.user= note._user.name.first
+            div.time= note.date.toLocaleTimeString()
 
 div.button 
   a(href='/account') HOME
