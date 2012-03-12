@@ -114,9 +114,9 @@ module.exports = {
   },
 
   // get all the events
-  getEvents: function(callback) {
-    var query = Event.find({},['name', '_id']);
-    query.sort('name',1);
+  getEvents: function(sortby, callback) {
+    var query = Event.find({},['name', 'date', '_id']);
+    query.sort(sortby,1);
     query.exec(function(err, events) {
       callback(null, events);
     });

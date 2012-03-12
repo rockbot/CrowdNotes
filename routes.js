@@ -54,6 +54,7 @@ module.exports = function(app) {
 
   app.get('/setEvent', ensureAuthenticated, events.getSetEvent);
   app.get('/setEvent/:id', ensureAuthenticated, events.setEventID);
+  app.get('/sortEvents/:operation', ensureAuthenticated, events.setEventSort);
 
   app.get('/clearEvent', ensureAuthenticated, events.clearEvent);  
 }

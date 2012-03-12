@@ -22,12 +22,11 @@ module.exports = {
 
   // app.get('/setEvent'...)
   getSetEvent: function(req, res){
-    db.getEvents(function(err, events) {
+    db.getEvents('name', function(err, events) {
       res.render('setEvent.jade', { locals:
         { title: 'Set my event'
         , currentEvents: events }
       });
-      { title: 'Set my event' }
     });
   },
 
@@ -35,6 +34,16 @@ module.exports = {
   setEventID: function(req, res){
     db.setEvent(req.params.id, function(err) {
       res.redirect('/newNote');
+    });
+  },
+
+  // app.get('/sortEvents/:operation'...
+  setEventSort: function(req, res) {
+    db.getEvents(req.params.operation, function(err, events) {
+      res.render('setEvent.jade', { locals:
+        { title: 'Set My Event'
+        , currentEvents: events }
+      });
     });
   },
 
