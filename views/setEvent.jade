@@ -1,17 +1,15 @@
-title Set Your Event
+title Set My Event
 
 div
   div#header
     h2 CrowdNotes
-    p Pick Your Event
+    p Pick My Event
 
   form(method='post')
-    div.center
-      select(id='eventid', name='eventid')
-        each event in currentEvents
-          option(value='#{event._id}')= event.name
-    div.button
-      input(type='submit', value='Set My Event!')
+    div
+      each event in currentEvents
+        p
+          a(href= '/setEvent/#{event._id}')= event.name
 
 div.button 
   a(href='/account') HOME

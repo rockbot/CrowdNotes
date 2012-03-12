@@ -31,9 +31,9 @@ module.exports = {
     });
   },
 
-  // app.post('/setEvent'...)
-  postSetEvent: function(req, res){
-    db.setEvent(req.param('eventid'), function(err) {
+  // app.get('/setEvent/:id'...)
+  setEventID: function(req, res){
+    db.setEvent(req.params.id, function(err) {
       res.redirect('/newNote');
     });
   },
