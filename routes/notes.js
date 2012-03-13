@@ -74,7 +74,7 @@ module.exports = {
 
   // app.get('/eventNotes'...)
   getEventNotes: function(req, res){
-    db.getEvents(function(err, events) {
+    db.getEvents('name', function(err, events) {
       res.render('eventNotes.jade', { locals:
         { title: 'Get all notes from an event'
         , currentEvents: events }
