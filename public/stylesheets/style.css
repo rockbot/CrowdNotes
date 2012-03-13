@@ -53,13 +53,6 @@ a {
   list-style-type: none;
   display: inline;
 }
-.note float,
-.note .name {
-  color: #00f;
-}
-.note .event {
-  color: #008000;
-}
 .hidden {
   visibility: hidden;
 }
@@ -83,14 +76,12 @@ textarea {
   margin-bottom: 40px;
 }
 .time {
-  color: #00f;
   display: inline-block;
   float: right;
   clear: right;
 }
 .body {
   display: inline-block;
-  color: #f00;
   width: 85%;
 }
 .user {
