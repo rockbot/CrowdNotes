@@ -8,8 +8,10 @@ div
   div
     form(method='post')
       div.center
+        label(for='eventname') Event Name: 
         input(id='eventname', type='text', name='eventname', size='20', placeholder='Event Name')
       div.center
+        label(for='eventmonth') Date: 
         select(id='eventmonth', name='eventmonth')
           months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
           each month, i in months
@@ -19,8 +21,10 @@ div
             option(value=i)= i
          input(id='eventyear', type='text', name='eventyear', value='2012', size='4') 
       div.center
+        label(for='eventdesc') Event Description: 
         input(id='eventdesc', type='text', name='eventdesc', placeholder='Description')
       div.center
+        label(for='eventhash') Event Hashtag: 
         input(id='eventhash', type='text', name='eventhash', placeholder='hashtag')
       div.button
         input(type='submit', value='Save my Event!')

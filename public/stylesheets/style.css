@@ -97,3 +97,6 @@ textarea {
   display: inline-block;
   float: right;
 }
+.footer {
+  text-align: center;
+}
