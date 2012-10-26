@@ -67,13 +67,13 @@ module.exports = {
     var newUser = new User ({
       name : { first: userInfo.fname, last: userInfo.lname }
     , email: userInfo.email
-    , password: userInfo.password
-    });
-
-    newUser.save(function(err) {
-      if (err) {throw err;}
-      //console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
-      callback(null, userInfo);
+    //, password: userInfo.password
+    }).setPassword(req.param("password"), function(newUser) {
+      newUser.save(function(err) {
+        if (err) {throw err;}
+        //console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
+        callback(null, userInfo);
+      });
     });
   },
 
