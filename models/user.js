@@ -19,16 +19,16 @@ var UserSchema = new Schema({
 });
 
 
-UserSchema
-.virtual('password')
-.get(function () {
-  return this._password;
-})
-.set(function (password) {
-  this._password = password;
-  var salt = this.salt = bcrypt.genSaltSync(10);
-  this.hash = bcrypt.hashSync(password, salt);
-});
+UserSchema.methods.setPassword = function (password, done) {
+    var that = this;
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+            that.hash = hash;
+            that.salt = salt;
+            done(that);
+        });
+    });
+}
 
 // Not entirely sure why the async version isn't working...
 //.virtual('password')
