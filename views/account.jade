@@ -1,27 +1,27 @@
-title= title
+extends layout
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Hi, #{currentUser.name.first}!
 
-div
-  div#header 
-    h2 CrowdNotes
-    p Hi, #{currentUser.name.first}! 
+      - if (myEvent)
+        p.center My Event: #{myEvent.name}
+          a(href="/setEvent") Change Your Event
+      - else
+        p.button
+          a(href="/setEvent") Step 1: Set Your Event
 
-  - if (myEvent)
-    p.center My Event: #{myEvent.name} 
-      a(href="/setEvent") Change Your Event
-  - else
-    p.button 
-      a(href="/setEvent") Step 1: Set Your Event
+      ul.options
+        li.button
+          a(href="/newNote") Write a note
+        li.button
+          a(href="/myEventNotes") See this event's notes
+        li.button
+          a(href="/reviewNotes") Review other notes
+        li.button
+          a(href="/newEvent") Create an event
 
-  ul.options 
-    li.button
-      a(href="/newNote") Write a note
-    li.button
-      a(href="/myEventNotes") See this event's notes
-    li.button
-      a(href="/reviewNotes") Review other notes
-    li.button
-      a(href="/newEvent") Create an event
-
-  div.button
-    a(href='/logout') Logout
+      div.button
+        a(href='/logout') Logout
 
