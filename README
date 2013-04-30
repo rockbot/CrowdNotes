@@ -1,12 +1,18 @@
 CrowdNotes is a web app for crowd-sourced note-taking.
 
 Developed using Node.js by Raquel Velez
+Modified by Keith Kuslak for newer versions of mongoose and node
 
 Learn more about the development of CrowdNotes at http://raquelvelez.com/blog/category/crowdnotes.
 
 =============================
 
 Version Notes
+CrowdNotes v 0.2.0 - 28 April 2012
+
+Updated the code to work with Node.js 0.10.5, mongoose 3.x, and changed
+the jade files to use blocks. Also, being new to git, I added a dumb 
+commit message.
 
 CrowdNotes v 0.1.5 - 06 Mar 2012
 

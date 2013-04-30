@@ -1,13 +1,13 @@
-title= title
+extends layout
+block content
+    div
+      div#header
+        h2 Welcome to #{title}!
+        p Crowd-Sourced Note-Taking
+      div.button
+        a(href='/login') Login
+      div.button
+        a(href='/register') Register
+      div.button
+        a(href='/about') Learn More
 
-div
-  div#header 
-    h2 Welcome to #{title}!
-    p Crowd-Sourced Note-Taking
-  div.button 
-    a(href='/login') Login
-  div.button
-    a(href='/register') Register
-  div.button
-    a(href='/about') Learn More
-    

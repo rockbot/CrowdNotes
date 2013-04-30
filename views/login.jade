@@ -1,17 +1,17 @@
-title Login to CrowdNotes
+extends layout
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Log In
 
-div
-  div#header
-    h2 CrowdNotes
-    p Log In
-
-  div
-    form(action='/login', method='POST')
-      #login.center
-        label(for='email') Email: 
-        input(type='text', name='email', placeholder='email@email.com')
-      #password.center
-        label(for='password') Password: 
-        input(type='password', name='password', placeholder='password')
-      #submit.button
-        input(type='submit', value='Log Me In!') Login
+      div
+        form(action='/login', method='POST')
+          #login.center
+            label(for='email') Email:
+            input(type='text', name='email', placeholder='email@email.com')
+          #password.center
+            label(for='password') Password:
+            input(type='password', name='password', placeholder='password')
+          #submit.button
+            input(type='submit', value='Log Me In!') Login

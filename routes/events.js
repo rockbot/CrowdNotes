@@ -4,9 +4,9 @@ module.exports = {
 
   // app.get('/newEvent'...)
   getNewEvent: function(req, res){
-   res.render('newEvent.jade', { locals:
+   res.render('newEvent.jade',
     { title: 'Create an Event!' }
-   });
+   );
   },
 
   // app.post('/newEvent'...)
@@ -23,10 +23,10 @@ module.exports = {
   // app.get('/setEvent'...)
   getSetEvent: function(req, res){
     db.getEvents('name', function(err, events) {
-      res.render('setEvent.jade', { locals:
+      res.render('setEvent.jade',
         { title: 'Set my event'
         , currentEvents: events }
-      });
+      );
     });
   },
 
@@ -40,10 +40,10 @@ module.exports = {
   // app.get('/sortEvents/:operation'...
   setEventSort: function(req, res) {
     db.getEvents(req.params.operation, function(err, events) {
-      res.render('setEvent.jade', { locals:
+      res.render('setEvent.jade',
         { title: 'Set My Event'
         , currentEvents: events }
-      });
+      );
     });
   },
 

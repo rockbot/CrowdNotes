@@ -1,21 +1,23 @@
-title= title
-div
-  div#header
-    h2 CrowdNotes
-    p Show Me the Notes!
+extends layout
 
-  div
-    ul.notesList
-      - if (notesList.length > 0)
-        each note in notesList
-          li 
-            ul.note
-              li.name #{note._user.name.first} #{note._user.name.last} 
-              li.event #{note._event.name}
-              li.date #{note.date.toLocaleDateString()}
-              li.time #{note.date.toLocaleTimeString()}
-              li.body #{note.body}
-      - else
-        p There are no notes yet!
-div.button 
-  a(href='/account') HOME
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Show Me the Notes!
+
+      div
+        ul.notesList
+          - if (notesList.length > 0)
+            each note in notesList
+              li
+                ul.note
+                  li.name #{note._user.name.first} #{note._user.name.last}
+                  li.event #{note._event.name}
+                  li.date #{note.date.toLocaleDateString()}
+                  li.time #{note.date.toLocaleTimeString()}
+                  li.body #{note.body}
+          - else
+            p There are no notes yet!
+    div.button
+      a(href='/account') HOME
