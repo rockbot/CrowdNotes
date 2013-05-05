@@ -1,16 +1,18 @@
-title Review Event Notes
-div
-  div#header 
-    h2 CrowdNotes 
-    p Review all notes from a specific event!
+extends layout
 
-  form(method='post')
-    div.center
-      select(id='eventid', name='eventid')
-        each event in currentEvents 
-          option(value='#{event._id}')= event.name
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Review all notes from a specific event!
+
+      form(method='post')
+        div.center
+          select(id='eventid', name='eventid')
+            each event in currentEvents
+              option(value='#{event._id}')= event.name
+        div.button
+          input(type='submit', value='Get the notes!')
+
     div.button
-      input(type='submit', value='Get the notes!')
-
-div.button
-  a(href='/account') HOME
+      a(href='/account') HOME

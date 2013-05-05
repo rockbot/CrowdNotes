@@ -11,34 +11,36 @@
 //    $('#lines').append($('<p>').append($('<b>').text(from), msg));
 //  }
 
-title Write a New Note!
-div
-  div#header
-    h2 CrowdNotes
-    p Note for 
-      strong #{myEvent.name} 
-      a(href='/setEvent') 
-        em Change Event
-  div
-    form(method='post')
-      div
-        textarea.boxsizing_border(id='note', name="note", rows="15", cols="50", placeholder='What are you learning, #{currentUser.name.first}?')
-        input(type='hidden', name='eventid', value='#{myEvent._id}')
-      br
-      div.button
-        input(type="submit", value="Save My Note!")
-  div
-    h3 Current Notes From This Event
-    //#notesList
-    div
-      - if (currentNotes.length === 0)
-        p There are no notes for this event yet
-      - else
-        each note in currentNotes
-          div.currentNote
-            div.body= note.body
-            div.user= note._user.name.first
-            div.time= note.date.toLocaleTimeString()
+extends layout
 
-div.button 
-  a(href='/account') HOME
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Note for
+          strong #{myEvent.name}
+          a(href='/setEvent')
+            em Change Event
+      div
+        form(method='post')
+          div
+            textarea.boxsizing_border(id='note', name="note", rows="15", cols="50", placeholder='What are you learning, #{currentUser.name.first}?')
+            input(type='hidden', name='eventid', value='#{myEvent._id}')
+          br
+          div.button
+            input(type="submit", value="Save My Note!")
+      div
+        h3 Current Notes From This Event
+        //#notesList
+        div
+          - if (currentNotes.length === 0)
+            p There are no notes for this event yet
+          - else
+            each note in currentNotes
+              div.currentNote
+                div.body= note.body
+                div.user= note._user.name.first
+                div.time= note.date.toLocaleTimeString()
+
+    div.button
+      a(href='/account') HOME

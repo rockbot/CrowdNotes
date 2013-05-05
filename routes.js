@@ -1,7 +1,6 @@
 
 /** routes.js
   */
-
 var passport = require('passport');
 
 var start = require('./routes/index');

@@ -4,19 +4,18 @@
   */
 var db = require('../accessDB');
 
-
 module.exports = {
 
   // app.get('/'...)
   index: function(req, res) {
-    res.render('index.jade', { locals:
+    res.render('index.jade',
       { title: 'CrowdNotes' }
-    });
+    );
   },
 
   // app.get('/register'...)
   getRegister: function(req, res) {
-    res.render('register.jade');
+    res.render('register.jade', { title: "Register" });
   },
 
   // app.post('/register'...)
@@ -33,22 +32,22 @@ module.exports = {
 
   // app.get('/about', ...
   about: function(req, res) {
-    res.render('about.jade');
+    res.render('about.jade', {title: "About Us"});
   },
 
   // app.get('/login', ...
   login: function(req, res) {
-    res.render('login.jade');
+    res.render('login.jade', {title: "Please Login"});
   },
 
   // app.get('/account', ensureAuthenticated, ...
   getAccount: function(req, res) {
     db.getMyEvent(function(err, myEvent) {
-      res.render('account.jade', { locals:
+      res.render('account.jade',
         { title: 'CrowdNotes' 
         , currentUser: req.user
         , myEvent: myEvent }
-      });
+      );
     });
   },
 

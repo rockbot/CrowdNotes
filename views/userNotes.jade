@@ -1,18 +1,20 @@
-title Review Notes from Another User
+extends layout
+title= Review Notes from Another User
 
-div
-  div#header 
-    h2 CrowdNotes 
-    p Review all notes from a specific user!
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Review all notes from a specific user!
 
-  div
-    form(method='post')
-      div.center
-        select(id='userid', name='userid')
-          each user in currentUsers 
-            option(value='#{user._id}') #{user.name.first} #{user.name.last}
-      div.button
-        input(type='submit', value='Get the notes!')
+      div
+        form(method='post')
+          div.center
+            select(id='userid', name='userid')
+              each user in currentUsers
+                option(value='#{user._id}') #{user.name.first} #{user.name.last}
+          div.button
+            input(type='submit', value='Get the notes!')
 
-div.button 
-  a(href='/account') HOME
+    div.button
+      a(href='/account') HOME

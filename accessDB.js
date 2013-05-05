@@ -68,7 +68,7 @@ module.exports = {
       name : { first: userInfo.fname, last: userInfo.lname }
     , email: userInfo.email
     //, password: userInfo.password
-    }).setPassword(req.param("password"), function(newUser) {
+    }).setPassword(userInfo.password, function(newUser) {
       newUser.save(function(err) {
         if (err) {throw err;}
         //console.log('Name: ' + newUser.name + '\nEmail: ' + newUser.email);
@@ -115,8 +115,8 @@ module.exports = {
 
   // get all the events
   getEvents: function(sortby, callback) {
-    var query = Event.find({},['name', 'date', '_id']);
-    query.sort(sortby,1);
+    var query = Event.find({},'name date _id');
+    query.sort(sortby);
     query.exec(function(err, events) {
       callback(null, events);
     });
@@ -124,7 +124,7 @@ module.exports = {
 
   // get all the users
   getUsers: function(callback) {
-    User.find({}, ['name', '_id'], function(err, users) {
+    User.find({}, 'name _id', function(err, users) {
       callback(null, users);
     });
   },
@@ -135,7 +135,7 @@ module.exports = {
     .find({'_event':eventid})
     .populate('_user')
     .populate('_event')
-    .run(function(err, notes) {
+    .exec(function(err, notes) {
       callback(null, notes);
     })
   },
@@ -153,7 +153,7 @@ module.exports = {
     .find({'_user':userid})
     .populate('_user')
     .populate('_event')
-    .run(function(err, notes) {
+    .exec(function(err, notes) {
       callback(null, notes);
     })
   }

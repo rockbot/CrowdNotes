@@ -1,20 +1,21 @@
-title Review Notes
+extends layout
 
-div
-  div#header 
-    h2 CrowdNotes
-    p Review Notes
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Review Notes
 
-  ul.options
-    li.button
-      a(href="/eventNotes") See all the notes from an event
-    li.button
-      a(href="/myNotes") See all of my notes
-    li.button
-      a(href="/userNotes") See all the notes from another user
-    li.button
-      a(href='/account') Home
-    li.button
-      a(href='/logout') Logout
+      ul.options
+        li.button
+          a(href="/eventNotes") See all the notes from an event
+        li.button
+          a(href="/myNotes") See all of my notes
+        li.button
+          a(href="/userNotes") See all the notes from another user
+        li.button
+          a(href='/account') Home
+        li.button
+          a(href='/logout') Logout
 
 

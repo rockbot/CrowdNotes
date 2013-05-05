@@ -1,26 +1,26 @@
-title Register a New User
+extends layout
+block content
+    div
+      div#header
+        h2 CrowdNotes
+        p Register as a User
 
-div
-  div#header
-    h2 CrowdNotes
-    p Register as a User
+      div
+        form(action='/register', method='POST')
+          #login.center
+            label(for='email') Email:
+            input(type='text', name='email', placeholder='email@email.com')
+          #password.center
+            label(for='password') Password:
+            input(type='password', name='password', placeholder='password')
+          #first-name.center
+            label(for='name.first') First Name:
+            input(type='text', name='name.first', placeholder='First Name')
+          #last-name.center
+            label(for='name.last') Last Name:
+            input(type='text', name='name.last', placeholder='Last Name')
+          #submit.button
+            input(type='submit') Register
 
-  div
-    form(action='/register', method='POST')
-      #login.center
-        label(for='email') Email: 
-        input(type='text', name='email', placeholder='email@email.com')
-      #password.center
-        label(for='password') Password: 
-        input(type='password', name='password', placeholder='password')
-      #first-name.center
-        label(for='name.first') First Name: 
-        input(type='text', name='name.first', placeholder='First Name')
-      #last-name.center
-        label(for='name.last') Last Name: 
-        input(type='text', name='name.last', placeholder='Last Name')
-      #submit.button
-        input(type='submit') Register
-
-div.button 
-  a(href='/account') HOME
+    div.button
+      a(href='/account') HOME
